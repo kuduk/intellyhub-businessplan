@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ESEMPIO MINIMO FUNZIONANTE (MWE) - DA COPIARE E INCOLLARE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt, a4paper, oneside]{article}
+
+% --- PACHETTI ESSENZIALI PER IL TEST ---
+\usepackage[a4paper, top=.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=1.5cm, headsep=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+\usepackage{lipsum} % Aggiunto per generare testo di prova
+
+% --- DEFINIZIONE FONT ---
+% Assicurati che i file .ttf siano in una sottocartella chiamata "fonts"
+% Se la compilazione fallisce qui, il problema è che non trova i font.
+\setmainfont{NotoSans-Regular.ttf}[
+    Path = ./fonts/,
+    BoldFont = NotoSans-Bold.ttf,
+    ItalicFont = NotoSans-Italic.ttf
+]
+\newfontfamily\lightfont{NotoSans-Light.ttf}[
+    Path = ./fonts/
+]
+
+% --- DEFINIZIONE COLORI ---
+\definecolor{PrimaryColor}{HTML}{6A4C9C}
+\definecolor{SecondaryColor}{HTML}{2A2F45}
+\definecolor{DarkGray}{HTML}{343a40}
+
+% --- IMPOSTAZIONE HEADER E FOOTER (Corretta) ---
+\pagestyle{fancy}
+\fancyhf{} % Pulisce tutti i campi
+\fancyhead[L]{\textcolor{SecondaryColor}{\small Business Plan}}
+\fancyhead[R]{\includegraphics[height=0.8cm]{IntellyHub_Logo_Colored.png}}
+\fancyfoot[C]{\textcolor{DarkGray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{PrimaryColor}\hrule}
+\renewcommand{\footrule}{\color{PrimaryColor}\hrule}
+
+
+% --- INIZIO DEL DOCUMENTO ---
+\begin{document}
+
+% --- PAGINA DEL TITOLO ---
+% Questa pagina avrà lo stile 'empty' per non avere header/footer
+\begin{titlepage}
+    \thispagestyle{empty} 
+    \centering
+    \vspace*{1cm}
+    \includegraphics[width=0.6\textwidth]{IntellyHub_Logo_Colored.png}
+    \vspace{2.5cm}
+    {\Huge\bfseries\color{PrimaryColor}Business Plan}
+    \vspace{1.5cm}
+    {\Large\itshape\lightfont Automations that think.}
+    \vfill
+    {\large\bfseries\color{PrimaryColor}DRAFT} \
+    {\large \today}
+\end{titlepage}
+
+% --- INDICE ---
+% Anche l'indice non avrà l'header 'fancy' per convenzione.
+\tableofcontents
+\newpage
+
+% --- CONTENUTO PRINCIPALE ---
+% Da qui in poi, l'header DEVE apparire.
+\section{Prima Sezione di Prova}
+Questa è la pagina numero 3 del PDF. Controlla attentamente la parte superiore di questa pagina. Dovresti vedere il testo "Business Plan" a sinistra e il logo a destra.
+\lipsum[1-3]
+
+\section{Seconda Sezione di Prova}
+L'header dovrebbe continuare ad essere visibile anche qui.
+\lipsum[4-5]
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FINE MWE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

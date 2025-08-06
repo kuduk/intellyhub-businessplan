@@ -1,0 +1,80 @@
+\documentclass[11pt, a4paper, oneside]{article}
+
+% --- PACHETTI NECESSARI ---
+\usepackage{graphicx} % Per includere immagini (logo)
+% Modificati i margini per dare più spazio all'intestazione
+\usepackage[a4paper, top=4cm, bottom=2.5cm, left=2.5cm, right=2.5cm, headheight=1.2cm, headsep=1.5cm]{geometry}
+\usepackage{xcolor} % Per definire e usare colori personalizzati
+\usepackage{titlesec} % Per personalizzare i titoli delle sezioni
+\usepackage{enumitem} % Per personalizzare le liste
+\usepackage{hyperref} % Per creare link interni ed esterni
+\usepackage{ragged2e} % Per un migliore allineamento del testo
+\usepackage{lettrine} % Per le lettere iniziali
+\usepackage{fancyhdr} % Per header e footer personalizzati
+\usepackage{tabularx} % Per tabelle con larghezza definita
+\usepackage{amsfonts} % Per simboli matematici se necessari
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{eurosym}
+\usepackage{microtype}
+\pgfplotsset{compat=1.18}
+% --- IMPOSTAZIONE FONT E LINGUA (Richiede XeLaTeX) ---
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\def\UrlBreaks{\do\.\do\/\do\-\do\_\do\?\do\&} % Per permettere le interruzioni di riga negli URL
+\newcolumntype{L}{>{\raggedright\arraybackslash}X} % Per colonne a larghezza variabile con testo allineato a sinistra
+
+
+% Carica i font direttamente dai file locali, specificando i diversi pesi.
+% Questo è il metodo più robusto.
+% Assicurati che i file .ttf siano in una sottocartella chiamata "fonts".
+\setmainfont{NotoSans-Regular.ttf}[
+    Path = ./fonts/,
+    BoldFont = NotoSans-Bold.ttf,
+    ItalicFont = NotoSans-Italic.ttf,
+    BoldItalicFont = NotoSans-BoldItalic.ttf
+]
+\setCJKmainfont{NotoSansSC-Regular.ttf}[
+    Path = ./fonts/,
+    BoldFont = NotoSansSC-Bold.ttf,
+    ItalicFont = NotoSansSC-Regular.ttf
+]
+% Definisce un nuovo font "light" per un uso personalizzato
+\newfontfamily\lightfont{NotoSans-Light.ttf}[
+    Path = ./fonts/,
+    ItalicFont = NotoSans-LightItalic.ttf
+]
+
+
+
+% --- DEFINIZIONE COLORI DEL BRAND (Personalizzabili) ---
+\definecolor{PrimaryColor}{HTML}{6A4C9C}   % Colore principale (es. Viola)
+\definecolor{SecondaryColor}{HTML}{2A2F45} % Colore secondario (es. Blu Scuro)
+\definecolor{AccentColor}{HTML}{8E7CC3}    % Colore d'accento
+\definecolor{DarkGray}{HTML}{343a40}      % Grigio scuro per il testo
+
+% --- IMPOSTAZIONI HYPERREF ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=PrimaryColor,
+    filecolor=AccentColor,      
+    urlcolor=SecondaryColor,
+    citecolor=AccentColor,
+    pdftitle={Business Plan},
+    pdfpagemode=FullScreen,
+}
+
+% --- PERSONALIZZAZIONE TITOLI DI SEZIONE ---
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{SecondaryColor}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{PrimaryColor}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{AccentColor}}

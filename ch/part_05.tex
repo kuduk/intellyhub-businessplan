@@ -1,0 +1,80 @@
+\caption{Competitive Matrix: IntellyHub}
+\label{tab:competitor_matrix}
+\resizebox{\textwidth}{!}{%
+% Changed the column specifiers from X to our new left-aligned L type
+\begin{tabularx}{1.2\textwidth}{lLLLL} 
+\toprule
+\textbf{Feature} & \textbf{IntellyHub} & \textbf{Zapier} & \textbf{n8n} & \textbf{Custom Python Script} \\
+\midrule
+\textbf{Primary Target} & Hybrid Technical Teams & Business Users & Developers \& Technical Users & Pure Developers \\
+\addlinespace
+\textbf{Visual Interface (No-Code)} & \textbf{Advanced} (node-based, synchronized) & \textbf{Simple} (linear, step-by-step) & \textbf{Advanced} (node-based) & \textbf{None} \\
+\addlinespace
+\textbf{Code Interface (Pro-Code)} & \textbf{Native} (YAML \& Python) & \textbf{None} (Only small JS/Python snippets) & \textbf{Limited} ("Code" Node for JS/TS) & \textbf{Native} (Python) \\
+\addlinespace
+\textbf{Execution Architecture} & Isolated Kubernetes Pod & Shared Infrastructure (Black Box) & Self-Hosted or Cloud (Docker) & Customer's Server/VM \\
+\addlinespace
+\textbf{Security \& Isolation} & \textbf{Maximum} & \textbf{Medium} & \textbf{Medium} (setup dependent) & \textbf{Minimal} (setup dependent) \\
+\addlinespace
+\textbf{Extensibility (Custom Logic)} & \textbf{Deep} (Plugin system to extend the core) & \textbf{Shallow} (Only pre-built connectors) & \textbf{Good} (Creation of custom "nodes") & \textbf{Unlimited} (but unstructured) \\
+\addlinespace
+\textbf{Plugin/Integration Ecosystem} & \textbf{50+} (Rapidly growing, open architecture) & \textbf{5000+} (Vast, mature) & \textbf{1000+} (Robust, community-driven) & \textbf{Unlimited} (but not standardized) \\
+\addlinespace
+\textbf{Contextual AI Assistant} & \textbf{Advanced} (MCP + Fine-Tuning) & \textbf{None} & \textbf{None} & \textbf{Using LLMs} \\
+\addlinespace
+\textbf{Governance and Operability} & \textbf{Native and Complete} (Logging, Monitoring, Versioning) & \textbf{Basic} (Execution history) & \textbf{Basic} (History, requires setup for advanced logging) & \textbf{None} (To be built manually) \\
+\addlinespace
+\textbf{Hybrid Team Collaboration} & \textbf{Key Strength} & \textbf{Very Difficult} & \textbf{Possible but not optimal} & \textbf{Impossible} \\
+\addlinespace
+\textbf{Onboarding \& Initial Simplicity} & \textbf{Evolving} (Powerful but with a learning curve for newcomers) & \textbf{Maximum} (Optimized for non-technical users) & \textbf{Good} (Requires some technical familiarity) & \textbf{Non-existent} (Requires programming knowledge) \\
+\addlinespace
+\textbf{Documentation \& Community Resources} & \textbf{In Progress} (Dedicated team needed for growth) & \textbf{Vast} (Years of content and forums) & \textbf{Strong} (Very active open-source community) & \textbf{Variable} (Depends on the libraries used, fragmented) \\
+\bottomrule
+\end{tabularx}%
+}
+\end{table}
+
+\section{Business Model}
+% Come genererai ricavi?
+\subsection{Pricing Strategy}
+IntellyHub's pricing is designed to feel familiar to anyone who has ever used a public-cloud service but simple enough for a business user to estimate in seconds. It starts with a cloud-subscription layer: five plans—from Free to Enterprise—each with a fixed monthly fee, a pre-paid block of pod-runtime minutes and an explicit support SLA. Table 1 (Cloud Platform Plans) comes first because, for the vast majority of customers, picking one of these bundles is all they ever need to do.\\
+
+If an automation fleet grows faster than expected, the model shifts smoothly to metered billing. Instead of counting “tasks” or “workflow runs”, IntellyHub charges only for the extra CPU, memory or GPU time actually consumed beyond the plan's pool, using the same unit prices you would see on AWS Fargate or GKE Autopilot. Those rates—and a handful of worked examples—are laid out in Table 2 (Runtime Tariffs) and Table 3 (Quick Cost Examples), so finance teams know the exact marginal cost before a single pod scales up.\\
+
+Some readers want nothing but capacity numbers, so Table 4 (Monthly Plan Allocation) distills the five plans down to “euros per month versus pod-minutes included”. For organisations that cannot run in a multi-tenant cloud, Table 5 (Self-Hosted Licences) shows how the same logic converts into an annual licence tied to concurrent pods inside the customer's own Kubernetes cluster.\\
+
+Finally, two financial snapshots translate the price list into business metrics: Table 6 (Per-User Economics) reveals gross profit per paying seat, while Table 7 and Table 8 project monthly recurring revenue and profit under a developer-heavy mix and an enterprise-heavy mix. Read in order, the tables take the reader from “Which plan should I click on the sign-up page?” all the way to “What does this mean for our P\&L at scale?”—with no hidden fees or unexplained leaps along the way.
+
+\subsection*{1. Cloud Platform Plans}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Plan} & \textbf{Monthly fee*} & \textbf{Included pod-min/mo} & \textbf{Support} \\
+\midrule
+Free & €0 & 100 per day & Community forum \\
+Developer & €25 & 10\,000 & SLA 48 h \\
+Team & €95 & 60\,000 & SLA 24 h \\
+Growth & €390 & 300\,000 & SLA 8 h, 99.9\% uptime \\
+Enterprise Cloud & custom & annual runtime pool & 24×7, TAM \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{2. Runtime Tariffs (Cloud)}
+\begin{center}
+\begin{tabular}{@{}p{4cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{Item} & \textbf{Price} & \textbf{How it is calculated} \\
+\midrule
+CPU runtime & \textbf{€0.06 / vCPU-hour} & Requested vCPU $\times$ active time (billed per minute, 1~min minimum) \\
+Memory runtime & \textbf{€0.007 / GB-hour} & Requested RAM $\times$ active time \\
+GPU (NVIDIA T4) & \textbf{€0.85 / GPU-hour} & Added only if the pod mounts a GPU \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{3. Quick Cost Examples}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Pod size (requests)} \& \textbf{Cost per hour} & \textbf{Cost per 10 min} \\

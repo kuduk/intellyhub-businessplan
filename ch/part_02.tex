@@ -1,0 +1,80 @@
+  {\thesubsubsection}{1em}{}
+
+% --- IMPOSTAZIONE HEADER E FOOTER ---
+\pagestyle{fancy}
+\fancyhf{} % Pulisce tutti i campi di header e footer
+% Imposta il testo a sinistra e il logo a destra dell'intestazione
+\fancyhead[L]{\textcolor{PrimaryColor}{\small Business Plan}}
+\fancyhead[R]{\includegraphics[height=0.8cm]{IntellyHub_Logo_Colored.png}}
+\fancyfoot[C]{\textcolor{DarkGray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{PrimaryColor}\hrule}
+\renewcommand{\footrule}{\color{PrimaryColor}\hrule}
+
+
+% --- INIZIO DEL DOCUMENTO ---
+\begin{document}
+% --- PAGINA DEL TITOLO ---
+% La prima pagina usa uno stile 'empty' per non avere l'intestazione
+\thispagestyle{empty} 
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    % Includi il logo (sostituisci 'logo.png' con il tuo file)
+    \includegraphics[width=0.6\textwidth]{IntellyHub_Logo_Colored.png}
+    
+    \vspace{2.5cm}
+    
+    % Titolo del documento
+    {\Huge\bfseries\color{PrimaryColor}Business Plan}
+    
+    \vspace{1.5cm}
+    
+    % Esempio di utilizzo del font light per il sottotitolo
+    {\Large\itshape\lightfont Automations that think.}
+    
+    \vfill % Spazio verticale flessibile
+    
+    % Informazioni sull'azienda e data
+    {\large\bfseries\color{PrimaryColor}v1.02 \color{SecondaryColor}Business Plan}
+    
+    \vspace{0.5cm}
+    
+    {\large \today}
+    
+\end{titlepage}
+
+% --- INDICE ---
+\tableofcontents
+\newpage
+
+% --- SEZIONI DEL BUSINESS PLAN ---
+
+\section{Executive Summary}
+IntellyHub is an AI Workflow and Agent Orchestration Platform that enables organizations to build, deploy, and manage complex AI-driven workflows and autonomous agents. It bridges the gap between traditional automation tools and cutting-edge AI frameworks by providing a unified \textbf{enterprise-grade platform} for orchestrating multiple AI models (LLMs), MCP Servers, retrieval-aug\-ment\-ed generation (RAG) pipelines, custom Python logic, and traditional app integrations. 
+
+The platform's hybrid visual/code IDE and extensible plugin system empower both AI engineers and DevOps teams to operationalize AI solutions without deep infrastructure expertise. 
+
+IntellyHub's \textbf{product-led growth strategy} (free tier and self-serve tools) is designed to drive rapid adoption among developers, with conversion to paid plans as usage scales. Given the explosive growth of AI automation/AutoML and MLOps markets (48,3\% annual\cite{AIMarket} and 39,8\%\cite{MLOpsMarket}), IntellyHub is poised to capture this convergence by offering the \textbf{security, governance, and scalability} that enterprises require alongside the flexibility developers demand.
+
+We project strong user adoption and revenue growth over the next three years, supported by a high-value SaaS business model targeting AI/ML engineering use cases.
+
+\section{Company Description}
+\subsection{Mission Statement}
+IntellyHub's mission is to empower organizations to harness the full potential of AI by providing a unified platform for orchestrating complex workflows and autonomous agents. We aim to bridge the gap between traditional automation tools and cutting-edge AI frameworks, enabling seamless integration and management of AI-driven solutions.
+
+\subsection{Vision}
+IntellyHub envisions a future where AI is seamlessly integrated into every aspect of business operations, enabling organizations to automate complex tasks, enhance decision-making, and drive innovation. We strive to be the leading platform for AI workflow orchestration, empowering developers and enterprises to build intelligent systems that transform industries and scientific research.
+
+\subsection{Values}
+\begin{itemize}
+    \item \textbf{Innovation:} We are committed to continuous innovation, pushing the boundaries of what is possible with AI and automation.
+    \item \textbf{Collaboration:} We believe in the power of collaboration, both within our team and with our users, to drive success and create value.
+    \item \textbf{Integrity:} We uphold the highest standards of integrity in all our interactions, ensuring trust and transparency with our customers and partners.
+    \item \textbf{Customer-Centricity:} Our users are at the heart of everything we do. We listen to their needs and strive to exceed their expectations.
+\end{itemize}
+
+
+\section{Product Overview}
