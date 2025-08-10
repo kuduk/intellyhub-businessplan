@@ -13,7 +13,6 @@
 \usepackage{fancyhdr} % Per header e footer personalizzati
 \usepackage{tabularx} % Per tabelle con larghezza definita
 \usepackage{amsfonts} % Per simboli matematici se necessari
-\usepackage{amsmath}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -101,7 +100,7 @@
 \thispagestyle{empty} 
 \begin{titlepage}
     \centering
-    \vspace{1cm}
+    \vspace*{1cm}
     
     % Includi il logo (sostituisci 'logo.png' con il tuo file)
     \includegraphics[width=0.6\textwidth]{IntellyHub_Logo_Colored.png}
@@ -356,235 +355,196 @@ To win in this landscape, IntellyHub will emphasize its unique combination of po
 \end{table}
 
 \section{Business Model}
-\subsection{Pricing Strategy \& Model}
-Our pricing model is strategically designed to support a hybrid Product-Led Growth (PLG) and Sales-Led Growth (SLG) motion. The core philosophy is to offer a frictionless entry point for individual developers and small teams, while providing a clear, value-driven path for customers to scale into high-value enterprise plans.
+% Come genererai ricavi?
+\subsection{Pricing Strategy}
+IntellyHub's pricing is designed to feel familiar to anyone who has ever used a public-cloud service but simple enough for a business user to estimate in seconds. It starts with a cloud-subscription layer: five plans—from Free to Enterprise—each with a fixed monthly fee, a pre-paid block of pod-runtime minutes and an explicit support SLA. Table 1 (Cloud Platform Plans) comes first because, for the vast majority of customers, picking one of these bundles is all they ever need to do.\\
 
-The primary value metric is \textbf{concurrent execution capacity}, measured in "Pods." One Pod represents one automation running simultaneously. This provides customers with a tangible and predictable measure of the operational power they are purchasing.
+If an automation fleet grows faster than expected, the model shifts smoothly to metered billing. Instead of counting “tasks” or “workflow runs”, IntellyHub charges only for the extra CPU, memory or GPU time actually consumed beyond the plan's pool, using the same unit prices you would see on AWS Fargate or GKE Autopilot. Those rates—and a handful of worked examples—are laid out in Table 2 (Runtime Tariffs) and Table 3 (Quick Cost Examples), so finance teams know the exact marginal cost before a single pod scales up.\\
 
-\subsubsection{Upselling and Cross-Selling Strategies}
+Some readers want nothing but capacity numbers, so Table 4 (Monthly Plan Allocation) distills the five plans down to “euros per month versus pod-minutes included”. For organisations that cannot run in a multi-tenant cloud, Table 5 (Self-Hosted Licences) shows how the same logic converts into an annual licence tied to concurrent pods inside the customer's own Kubernetes cluster.\\
 
-To maximize customer lifetime value and create a smooth growth path, we have implemented several strategic levers:
+Finally, two financial snapshots translate the price list into business metrics: Table 6 (Per-User Economics) reveals gross profit per paying seat, while Table 7 and Table 8 project monthly recurring revenue and profit under a developer-heavy mix and an enterprise-heavy mix. Read in order, the tables take the reader from “Which plan should I click on the sign-up page?” all the way to “What does this mean for our P\&L at scale?”—with no hidden fees or unexplained leaps along the way.
 
-\begin{itemize}
-    \item \textbf{Per-Pod Cross-Selling:} All paid plans (Standard, Business, and Scale) have the ability to purchase additional Pods on an à la carte basis. This provides flexibility for customers experiencing growth. The price for an add-on Pod is set at a premium---\textbf{\euro{25} per month}---which is proportionally higher than the effective per-pod cost within the plan bundles. This price structure ensures that while customers have flexibility, the most cost-effective solution for significant growth is always to upgrade to the next tier.
-
-    \item \textbf{Strategic Hard Caps for Upselling:} Each plan has a pre-defined maximum number of total Pods it can support, including add-ons (e.g., the Business plan is capped at 25 total Pods). This ceiling is a strategic tool: it creates a compelling event for customers who consistently operate near this limit, forcing a conversation with our sales team to migrate to a higher-tier plan. This transforms the need for more capacity into a qualified, high-value sales lead.
-
-    \item \textbf{Feature Gating:} Value is not only defined by capacity. Each pricing tier unlocks qualitatively different features, creating a "value ladder." The Business plan unlocks collaboration (RBAC, Teams), the Scale plan unlocks greater scalability and integration (SSO), and the Enterprise plan unlocks unique platform intelligence (AI-driven analysis and auditing). This ensures that upgrades are driven by a need for new capabilities, not just more capacity.
-\end{itemize}
-
-\subsubsection{Pricing Criticality and Risk Mitigation}
-
-The primary strategic risk in this model is the significant price and value gap that remains between the upper-mid-market tier (`Scale`) and the high-end `Enterprise` plan. While our `Scale` plan provides a bridge, customers must still be guided across a substantial value proposition change to move to a full enterprise contract.
-
-This is a deliberate strategic choice designed to clearly segment the market between self-service-oriented customers and high-touch enterprise partners. We mitigate this risk by ensuring our `Enterprise` offering provides unique, mission-critical features (like the AI Auditing platform) that are impossible to replicate with capacity add-ons alone, making the value proposition clear and compelling for organizations that require such capabilities.
-
-\subsubsection{Pricing Tiers}
-
-\begin{table}[H]
-\centering
-\caption{IntellyHub Final Pricing Model}
-\label{tab:final_pricing_model}
-\begin{tabularx}{\textwidth}{l L L L L} 
+\subsection*{1. Cloud Platform Plans}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
 \toprule
-\textbf{Plan} & \textbf{Monthly Price} & \textbf{Included Pods} & \textbf{Total Pod Limit} & \textbf{Key Features Unlocked} \\
+\textbf{Plan} & \textbf{Monthly fee*} & \textbf{Included pod-min/mo} & \textbf{Support} \\
 \midrule
-\textbf{Free} & \euro{0} & 1 & 1 (max) & Basic features, 5-automation limit. \\
-\addlinespace
-\textbf{Standard} & \euro{49} & 3 & 10 (max) & Professional use, unlimited automations. \\
-\addlinespace
-\textbf{Business} & \euro{299} & 15 & 25 (max) & Team Collaboration (5 users, RBAC). \\
-\addlinespace
-\textbf{Scale} & \euro{999} & 50 & 70 (max) & Scalability (25 users, SSO). \\
-\addlinespace
-\textbf{Enterprise} & From \euro{2,999} & 100+ & Unlimited & \textbf{AI Platform for proactive analysis and auditing}, On-Premise option. \\
+Free & €0 & 100 per day & Community forum \\
+Developer & €25 & 10\,000 & SLA 48 h \\
+Team & €95 & 60\,000 & SLA 24 h \\
+Growth & €390 & 300\,000 & SLA 8 h, 99.9\% uptime \\
+Enterprise Cloud & custom & annual runtime pool & 24×7, TAM \\
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{tabular}
+\end{center}
 
-\subsubsection{Execution Cost Analysis}
-
-To ensure the financial viability of our pricing, we have compared the monthly plan price against the raw infrastructure cost of the included Pods, assuming a 24/7 usage pattern for a standard-sized Pod (0.25 vCPU, 0.5 GB RAM). The cost of one such Pod running 24/7 is approximately \euro{13.32 per month}. The table below illustrates the gross margin on this consumption.
-
-\begin{table}[H]
-\centering
-\caption{Plan Price vs. Estimated Infrastructure Cost (24/7 Usage)}
-\label{tab:cost_analysis}
-\begin{tabularx}{\textwidth}{L X X X} 
+\subsection*{2. Runtime Tariffs (Cloud)}
+\begin{center}
+\begin{tabular}{@{}p{4cm}p{4cm}p{6cm}@{}}
 \toprule
-\textbf{Plan} & \textbf{Monthly Price} & \textbf{Est. Infrastructure Cost} & \textbf{Est. Gross Margin*} \\
+\textbf{Item} & \textbf{Price} & \textbf{How it is calculated} \\
 \midrule
-\textbf{Standard} & \euro{49} & \euro{39.96} (for 3 Pods) & 18.4\% \\
-\addlinespace
-\textbf{Business} & \euro{299} & \euro{199.80} (for 15 Pods) & 33.2\% \\
-\addlinespace
-\textbf{Scale} & \euro{999} & \euro{666.00} (for 50 Pods) & 33.3\% \\
+CPU runtime & \textbf{€0.06 / vCPU-hour} & Requested vCPU $\times$ active time (billed per minute, 1~min minimum) \\
+Memory runtime & \textbf{€0.007 / GB-hour} & Requested RAM $\times$ active time \\
+GPU (NVIDIA T4) & \textbf{€0.85 / GPU-hour} & Added only if the pod mounts a GPU \\
 \bottomrule
-\end{tabularx}
-\raggedright
-\footnotesize{*Margin is calculated solely on the cost of raw compute and memory resources for included Pods and does not account for other operational costs.}
-\end{table}
-\section{Hiring Roadmap \& Cost Projections}
+\end{tabular}
+\end{center}
 
-This section outlines the strategic hiring plan designed to build a world-class organization capable of executing our product vision and go-to-market strategy. The roadmap is aligned with our phased growth, starting with a strong technical foundation and progressively building a sophisticated go-to-market engine. The associated cost projections reflect this balanced, execution-oriented approach.
+\subsection*{3. Quick Cost Examples}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Pod size (requests)} \& \textbf{Cost per hour} & \textbf{Cost per 10 min} \\
+\midrule
+0.25 vCPU / 0.5 GB & €0.018 & €0.003 \\
+1 vCPU / 2 GB & €0.074 & €0.012 \\
+2 vCPU / 4 GB & €0.148 & €0.025 \\
+1 vCPU / 4 GB + 1 GPU & €0.938 & €0.156 \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\subsection{Team Acquisition Roadmap}
 
-\subsubsection{R\&D and Product Team}
-The R\&D team is structured to ensure the core platform is stable, scalable, and secure, while also fostering a rich ecosystem of plugins and integrations. The hiring plan is based on the projections in the financial model.
+\smallskip
+\noindent *Annual billing; month-to-month +15\%.
 
+
+\subsection*{4. Monthly Plan Allocation (Pod-Minutes)}
+\begin{center}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Plan} & \textbf{Monthly fee} & \textbf{Pod‑minutes included} \\
+\midrule
+Free        & €0    & 3\,000 (100 per day) \\
+Developer   & €25   & 10\,000 \\
+Team        & €95   & 60\,000 \\
+Growth      & €390  & 300\,000 \\
+Enterprise Cloud & custom  & Custom annual pool \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{5. Self-Hosted / On-Prem Licenses}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{License} & \textbf{Concurrent pod cap} & \textbf{Annual fee} & \textbf{Extra pod} \\
+\midrule
+Core & 50 Small-equiv. & €28\,000 & €15 / pod-month \\
+Plus & 200 & €65\,000 & €13 / pod-month \\
+Elite & Unlimited & custom & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{6. Per-User Pricing and Gross Margin}
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Tier} & \textbf{Price / user / mo} & \textbf{Assumed Gross Margin} & \textbf{Gross Profit / user} \\
+\midrule
+Developer & €25 & 40\,\% & €10 \\
+Team      & €95 & 40\,\% & €38 \\
+Growth    & €390 & 40\,\% & €156 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{7. Scenario 1 – Product‑Led Growth Funnel}
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Population} & \textbf{User Mix} (Dev / Team / Growth) & \textbf{MRR} & \textbf{Gross Profit} \\
+\midrule
+100 users   & 70 / 20 / 10    & €7\,550   & €3\,020  \\
+500 users   & 350 / 100 / 50  & €37\,750  & €15\,100 \\
+1\,000 users & 700 / 200 / 100 & €75\,500  & €30\,200 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{8. Scenario 2 – Enterprise‑Heavier Mix}
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Population} & \textbf{User Mix} (Dev / Team / Growth) & \textbf{MRR} & \textbf{Gross Profit} \\
+\midrule
+100 users   & 50 / 30 / 20   & €13\,650  & €5\,460  \\
+500 users   & 250 / 150 / 100 & €68\,250  & €27\,300 \\
+1\,000 users & 500 / 300 / 200 & €136\,500 & €54\,600 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Cost Projections \& Team Roadmap (Expanded R\&D Team)}
+This section outlines a revised forecast of operational costs and the hiring roadmap. This version reflects an expanded Research \& Development team in Year 1 to accelerate product completion and ecosystem growth, while running market validation in parallel.
+
+Recognizing the need to remain competitive for key roles, monetary compensation will be supplemented by a stock option plan (ESOP). This will allow us to attract high-level profiles, align long-term interests, and optimize initial operational costs.
+
+\subsection*{Hiring Roadmap}
+The team will be built with specialized roles from the start to cover all critical areas of the product and business.
 \begin{itemize}
-    \item \textbf{Year 1: Foundation (6 FTEs).} Focus on finalizing the Minimum Viable Product (MVP), stabilizing the core architecture, and building essential plugins. The team will be composed of specialists in frontend, backend, core logic, and DevOps.
-    \item \textbf{Year 2: Expansion (7 FTEs).} Add a generalist software developer to increase development velocity and respond to feedback from early adopters.
-    \item \textbf{Year 3: Scaling (8 FTEs).} Hire a dedicated Product Manager to streamline the development process, manage the product backlog, and lead the long-term roadmap strategy.
-\end{itemize}
-
-\subsubsection{Go-to-Market (GTM) Team}
-The GTM team is built around a hybrid model. A lean PLG engine (driven by marketing and community) will generate inbound, product-qualified leads to increase the efficiency of a specialized, high-touch enterprise sales team (SLG).
-
-\begin{itemize}
-    \item \textbf{Year 1: Foundation (2 FTEs).}
+    \item \textbf{Year 1 (Foundation \& Early Validation):} Focus on finalizing the core product with a larger, specialized development team, while simultaneously validating market interest with a dedicated commercial role.
     \begin{itemize}
-        \item \textbf{1 Senior Account Executive:} A "missionary" salesperson focused on closing the first strategic, high-value enterprise accounts.
-        \item \textbf{1 Marketing \& Community Manager:} A hybrid role to build initial brand awareness, create foundational technical content, and manage the community channels.
+        \item Core Founder(s) (Strategic Lead)
+        \item 1 Frontend / UI Developer (Interface Specialist)
+        \item 2 Backend Developer (API Specialist)
+        \item 2 Core Logic Developer (Automation Engine Specialist)
+        \item 3 Plugin / Ecosystem Developer
+        \item 2 DevOps Engineer (Infrastructure Specialist)
     \end{itemize}
-    \item \textbf{Year 2: Specialization (5 Total FTEs).}
+    \item \textbf{Year 2 (Expansion):} Build upon the validated model and expand the go-to-market engine.
     \begin{itemize}
-        \item \textbf{Build the first "Sales Pod":} Add a \textbf{Sales Development Representative (SDR)} to generate outbound leads and a \textbf{Solutions Architect} for technical pre-sales and POCs.
-        \item \textbf{1 Developer Advocate:} To scale technical content creation (webinars, tutorials) and engage with the developer community.
+        \item +1 Generalist Software Developer
+        \item +1 Developer Advocate (Marketing)
+        \item +1 Customer Success Specialist
     \end{itemize}
-    \item \textbf{Year 3: Scaling \& Leadership (9 Total FTEs).}
+    \item \textbf{Year 3 (Scaling):} Structure the organization for growth with dedicated leadership.
     \begin{itemize}
-        \item \textbf{1 VP of Sales:} Senior leadership to scale the sales process and team.
-        \item \textbf{Add a second "Sales Pod"} (1 AE + 1 SDR) to double sales capacity.
-        \item \textbf{1 dedicated Partner Manager} to build and scale the certified partner ecosystem.
-        \item \textbf{1 dedicated Community Manager} to manage the growing community.
+        \item +1 Dedicated Product Manager
+        \item +1 Head of Marketing
+        \item +1 Sales Manager
+        \item +1 Developer Relations (DevRel) Manager
     \end{itemize}
 \end{itemize}
 
-\subsection{Estimated Annual Costs}
-
-The following table provides a high-level projection of operational costs based on the integrated team structure. This model assumes a higher investment in GTM personnel to create the synergy between PLG and SLG, leading to a more robust and efficient growth trajectory.
-
-\section{Organizational Structure \& Personnel Costs}
-
-This section details the planned organizational structure and the associated personnel costs required to execute the company's strategy. The structure is designed to be lean yet highly specialized, ensuring excellence in both product development and market execution.
-
-\subsection{Management Team}
-The founding team provides the core technical and scientific leadership. The initial compensation is structured to be capital-efficient, with a one-time bonus to facilitate relocation and setup.
-
-\begin{itemize}
-    \item \textbf{Roles:} Chief Technology Officer (CTO), Head of Engineering, and Chief Scientist.
-    \item \textbf{Base Compensation:} A combined annual salary of \euro{120,000} for the three founders.
-    \item \textbf{Year 1 Bonus:} A one-time relocation and setup bonus of \euro{30,000}.
-\end{itemize}
-
-\subsection{R\&D and Product Team}
-This team is responsible for building, maintaining, and innovating the IntellyHub platform. The estimated fully loaded cost per FTE is \euro{85,000/year}.
+\subsection*{Estimated Annual Costs}
+The following table provides a revised high-level projection of operational costs based on the expanded team structure and a more aggressive marketing budget.
 
 \begin{table}[H]
 \centering
-\caption{R\&D Team Hiring Roadmap \& Costs}
-\label{tab:rd_team_costs}
-\begin{tabularx}{\textwidth}{l c c c}
-\toprule
-\textbf{Role} & \textbf{Year 1 FTEs} & \textbf{Year 2 FTEs} & \textbf{Year 3 FTEs} \\
-\midrule
-Frontend / UI Developer & 1 & 1 & 1 \\
-Backend Developer (API) & 2 & 2 & 2 \\
-Core Logic Developer & 2 & 2 & 2 \\
-Plugin / Ecosystem Developer & 1 & 1 & 2 \\ % Adjusted from original to fit 6->7->8
-DevOps Engineer & 0 & 1 & 1 \\ % Adjusted from original
-Product Manager & 0 & 0 & 1 \\
-\midrule
-\textbf{Total R\&D FTEs} & \textbf{6} & \textbf{7} & \textbf{9} \\ % Adjusted to reflect table
-\textbf{Estimated Annual Cost} & \textbf{\euro{510,000}} & \textbf{\euro{595,000}} & \textbf{\euro{765,000}} \\ % Adjusted cost
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Go-to-Market (GTM) Team}
-The GTM team is structured to execute a hybrid PLG/SLG strategy, generating inbound leads to support a specialized enterprise sales force. The estimated fully loaded cost per FTE is \euro{75,000/year}.
-
-\begin{table}[H]
-\centering
-\caption{GTM Team Hiring Roadmap \& Costs}
-\label{tab:gtm_team_costs}
-\begin{tabularx}{\textwidth}{l c c c}
-\toprule
-\textbf{Role} & \textbf{Year 1 FTEs} & \textbf{Year 2 FTEs} & \textbf{Year 3 FTEs} \\
-\midrule
-Senior Account Executive (AE) & 1 & 1 & 2 \\
-Marketing \& Community Manager & 1 & 1 & 1 \\
-Sales Development Rep. (SDR) & 0 & 1 & 2 \\
-Solutions Architect & 0 & 1 & 1 \\
-Developer Advocate & 0 & 1 & 1 \\
-VP of Sales & 0 & 0 & 1 \\
-Partner Manager & 0 & 0 & 1 \\
-Community Manager (Dedicated) & 0 & 0 & 1 \\
-\midrule
-\textbf{Total GTM FTEs} & \textbf{2} & \textbf{5} & \textbf{9} \\
-\textbf{Estimated Annual Cost} & \textbf{\euro{150,000}} & \textbf{\euro{375,000}} & \textbf{\euro{675,000}} \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-
-\subsection{Summary of Personnel Costs}
-The following table consolidates all personnel-related expenses, providing a clear overview of the total investment in human capital year over year.
-
-\begin{table}[H]
-\centering
-\caption{Consolidated Annual Personnel Costs}
-\label{tab:personnel_costs_summary}
-\begin{tabularx}{\textwidth}{l L L L}
-\toprule
-\textbf{Cost Category} & \textbf{Year 1 Estimate} & \textbf{Year 2 Estimate} & \textbf{Year 3 Estimate} \\
-\midrule
-\textbf{Management Team} & \euro{150,000}* & \euro{120,000} & \euro{120,000} \\
-\addlinespace
-\textbf{Personnel (R\&D)} & \euro{510,000} & \euro{595,000} & \euro{765,000} \\
-\addlinespace
-\textbf{Personnel (GTM)} & \euro{150,000} & \euro{375,000} & \euro{675,000} \\
-\midrule
-\textbf{Total Personnel Costs} & \textbf{\euro{810,000}} & \textbf{\euro{1,090,000}} & \textbf{\euro{1,560,000}} \\
-\bottomrule
-\end{tabularx}
-\raggedright
-\footnotesize{*Includes a one-time \euro{30,000} relocation bonus.}
-\end{table}
-
-
-\begin{table}[H]
-\centering
-\caption{Revised high-level operational cost projections for the integrated team plan.}
-\label{tab:cost_projections_integrated_team}
 \begin{tabularx}{\textwidth}{L L L L}
 \toprule
 \textbf{Cost Category} & \textbf{Year 1 Estimate} & \textbf{Year 2 Estimate} & \textbf{Year 3 Estimate} \\
 \midrule
-\textbf{Personnel (R\&D)} & \euro{510,000} & \euro{595,000} & \euro{680,000} \\
-(6 FTEs) & (7 FTEs) & (8 FTEs) \\
+\textbf{Personnel (R\&D)} & €510,000 & €595,000 & €680,000 \\
+(Founder, Developers, DevOps) & (6 FTEs) & (7 FTEs) & (8 FTEs) \\
 \addlinespace
-\textbf{Personnel (GTM)} & \euro{150,000} & \euro{375,000} & \euro{675,000} \\
-(2 FTEs) & (5 FTEs) & (9 FTEs) \\
+\textbf{Personnel (GTM)} & €75,000 & €225,000 & €495,000 \\
+(Sales, Marketing, CS, DevRel) & (1 FTE) & (3 FTEs) & (6 FTEs) \\
 \addlinespace
-\textbf{Infrastructure \& Platform} & \euro{30,000} & \euro{75,000} & \euro{150,000} \\
+\textbf{Infrastructure \& Platform} & €30,000 & €75,000 & €150,000 \\
 (Cloud, K8s, LLM APIs, Software Licenses) & & & \\
 \addlinespace
-\textbf{General \& Administrative (G\&A)} & \euro{100,000} & \euro{200,000} & \euro{450,000} \\
-(Legal, Accounting, Marketing Budget) & & & \\
+\textbf{General \& Administrative (G\&A)} & €100,000 & €200,000 & €450,000 \\
+(Legal, Accounting, Sales \& Marketing Budget) & & & \\
 \midrule
-\textbf{Total Estimated Annual Burn} & \textbf{\euro{790,000}} & \textbf{\euro{1,245,000}} & \textbf{\euro{1,955,000}} \\
+\textbf{Total Estimated Annual Burn} & \textbf{€715,000} & \textbf{€1,095,000} & \textbf{€1,775,000} \\
 \bottomrule
 \end{tabularx}
+\caption{Revised high-level operational cost projections for the expanded team plan. See assumptions below.}
+\label{tab:cost_projections_expanded_team}
 \end{table}
 
 \paragraph*{Key Assumptions:}
 \begin{itemize}
-    \item Personnel costs are fully loaded estimates (including salary, taxes, and benefits), averaging \euro{85k/year} for R\&D roles and \euro{75k/year} for GTM roles.
-    \item \textbf{Infrastructure \& Platform} costs include a buffer for third-party service costs, which are expected to scale with user engagement.
-    \item \textbf{General \& Administrative (G\&A)} costs include a budget for marketing activities (content, ads), sales tools, and professional services.
+    \item Personnel costs are fully loaded estimates (including salary, taxes, and benefits), averaging €85k/year for R\&D roles and €75k/year for initial GTM roles.
+    \item \textbf{Infrastructure \& Platform} costs include a buffer for the variable and potentially volatile cost of third-party LLM APIs, which is expected to scale with user engagement of the AI features.
+    \item \textbf{General \& Administrative (G\&A)} costs have been significantly revised upwards to reflect a more aggressive budget for marketing activities (content creation, community building, initial ad spend), sales tools (CRM), and professional services from day one.
+    \item These projections represent the estimated annual operational burn rate and do not include one-off capital expenditures such as hardware for new hires or initial recruiting fees.
 \end{itemize}
 
 \section{Objective of the Analysis}
@@ -593,7 +553,7 @@ This document provides a strategic estimate of when IntellyHub could reach its o
 \section{Cost Assumptions}
 The analysis uses the cost projections from the aggressive growth plan, which includes a specialized team and a significant marketing budget from the first year.
 
-\subsection{Estimated Monthly Operational Costs}
+\subsection*{Estimated Monthly Operational Costs}
 \begin{itemize}
   \item \textbf{Year 1:} \euro{}\,59\,600 / month (annual burn \euro{}\,715\,000)
   \item \textbf{Year 2:} \euro{}\,91\,250 / month (annual burn \euro{}\,1\,095\,000)
@@ -636,258 +596,37 @@ The productivity targets for our enterprise sales team are also set conservative
 
 Taken together, these deliberately restrained assumptions ensure that the acquisition curve in our financial model is plausible and not reliant on best-case-scenario performance.
 
-% ===========================
-% Financial Model Formulas
-% ===========================
 
-\section{Break-Even Analysis}
-\subsection{Overview of the financial simulation model}
-\label{subsec:simple-model}
+\subsection{Break-Even Projection}
 
-This subsection explains the model in plain language. It describes what goes in, what comes out, and the small set of rules the simulation follows month by month.
-
-\paragraph{What the model answers}
-It estimates, over 5 years (60 months): monthly revenues, costs, net profit/loss, cash balance, runway, and the month when we reach break-even. It also separates PLG (self-service) and SLG (enterprise) revenues.
-
-\paragraph{Main inputs}
-\begin{itemize}
-\item \textbf{Starting cash:} the initial capital available at month 0.
-\item \textbf{Costs per category and year:} Management, R\&D, PLG, SLG, Partner, Infrastructure, G\&A. Each category has an \emph{uplift} multiplier to account for prudential overhead (compliance, legal, recruiting, cloud, etc.).
-\item \textbf{Prices:} monthly list prices for Standard, Business, Scale, and an average monthly enterprise MRR (ACV/12). Add-on pods have a unit price.
-\item \textbf{Customer dynamics:} monthly PLG acquisitions per tier for each year; yearly enterprise (SLG) deals; churn rates (PLG monthly, SLG annual converted to monthly).
-\item \textbf{Add-ons and store:} per-tier adoption rate and average pods; store one-off revenue assumptions (rate, items, average price).
-\item \textbf{Policy gates (optional):} cost cut when runway is low, and temporary reduction of PLG acquisitions when runway is very low.
-\end{itemize}
-
-\paragraph{Monthly cycle (what happens each month)}
-\begin{enumerate}
-\item \textbf{Apply churn at the start of the month.} We reduce the active customer base by the churn rate (PLG monthly; SLG uses the monthly equivalent of the annual churn).
-\item \textbf{Add new customers.} For PLG, we add the planned new sign-ups for the current year (possibly reduced by a soft-freeze multiplier). For SLG, new enterprise contracts are spread quarterly (one quarter of the annual plan every 3rd month).
-\item \textbf{Compute recurring revenue.} PLG and SLG subscription MRR come from actives times price. Add-on MRR is a share of actives (adoption rate) times average pods times pod price.
-\item \textbf{Add store revenue (one-off).} A fraction of total actives purchase items from the store; this is treated as non-recurring cash in the month.
-\item \textbf{Compute monthly costs.} We apply the per-category uplifted annual cost divided by 12, then a policy multiplier if a spend cut is active.
-\item \textbf{Compute P\&L and cash.} Net result for the month is total revenue (recurring + store) minus costs. Cash balance increases (or decreases) by this net result.
-\item \textbf{Update burn and runway.} Burn is the positive part of monthly losses. Runway is cash divided by the moving-average burn over the last \emph{W} months (default 3). If there is no burn, runway is infinite.
-\item \textbf{Set policy for next month.} If runway is below thresholds, the model can reduce discretionary costs and/or slow paid PLG acquisitions in the following month.
-\end{enumerate}
-
-\paragraph{What the charts show}
-\begin{itemize}
-\item A stacked area of \textbf{PLG total MRR} (plans + add-ons) vs. \textbf{SLG MRR}, with the \textbf{monthly cost} line overlaid.
-\item A secondary axis showing the \textbf{runway (months)}.
-\item Vertical markers for \textbf{operational break-even} (recurring MRR  monthly costs) and \textbf{cash break-even} (net result  0 including store).
-\end{itemize}
-
-\paragraph{Key definitions (kept intuitive)}
-\begin{description}
-\item[Operational break-even] First month when recurring MRR (subscriptions + add-ons) is at least equal to monthly operating costs.
-\item[Cash break-even] First month when total revenue (recurring + store one-offs) covers monthly costs, i.e., net result .
-\item[Runway] How many months of operations remain at the current burn rate; we use a short moving average of recent burn to make it more stable.
-\end{description}
-
-\paragraph{Why this is conservative but controllable}
-Uplift multipliers inflate costs in a credible way, capturing overhead that often appears in real execution. Policy gates make the plan self-correcting when runway tightens, protecting the path to break-even without assuming unrealistic growth.
-
-\subsection{Financial Model: Variables and Notation}
-\begin{itemize}
-  \item Time is in months: $t = 1,2,\dots,T$ with $T = 12 \cdot \text{years}$. Year index $y(t) = \lceil t/12 \rceil$.
-  \item Plans: PLG tiers $p \in \mathcal{P}=\{\text{standard},\ \text{business},\ \text{scale}\}$ and enterprise (SLG).
-  \item Customers: $c^p_t$ (active PLG customers of tier $p$ at month $t$), $c^{\mathrm{ent}}_t$ (active enterprise).
-  \item Prices: $P_p$ (monthly price for tier $p$), $P_{\mathrm{ent}}$ (enterprise MRR), $P_{\mathrm{pod}}$ (add-on pod).
-  \item Costs: $\mathrm{Cost}_{k,y}$ annual base cost for category $k$ in year $y$ with uplift factor $u_k$.
-  \item Churn: $\delta_{\mathrm{PLG}}$ (monthly), $\delta^{\mathrm{annual}}_{\mathrm{SLG}}$ (annual). 
-  \item Add-ons: adoption rate $r_p$, average pods $\bar{n}_p$.
-  \item Store: purchase rate $\rho$, average purchases $\bar{u}$, average sale price $P_{\mathrm{store}}$.
-  \item Policy parameters: spend cut $\gamma$ (e.g., $0.10$), runway guardrail $R_{12}$ (12 months), soft-freeze $R_{9}$ (9 months), window $W$ (e.g., $3$ months).
-\end{itemize}
-
-\subsection{Cost Model}
-\paragraph{Annual cost with per-category uplift.}
-\begin{align}
-C^{\mathrm{annual}}_y 
-  &= \sum_{k \in \{\mathrm{MGMT},\mathrm{RND},\mathrm{PLG},\mathrm{SLG},\mathrm{PARTNER},\mathrm{INFRA},\mathrm{GA}\}}
-     \mathrm{Cost}_{k,y}\, u_k.
-\end{align}
-
-\paragraph{Monthly operating cost with spend gate multiplier.}
-Let $s_t$ be the spend multiplier (policy below). Then:
-\begin{align}
-C^{\mathrm{monthly}}_t 
-  &= \frac{C^{\mathrm{annual}}_{y(t)}}{12} \cdot s_t.
-\end{align}
-
-\subsection{Customer Dynamics}
-\paragraph{Churn conversion (enterprise annual $\to$ monthly).}
-\begin{align}
-\delta^{\mathrm{monthly}}_{\mathrm{SLG}} 
-  &= 1 - \bigl(1 - \delta^{\mathrm{annual}}_{\mathrm{SLG}}\bigr)^{1/12}.
-\end{align}
-
-\paragraph{Monthly update with churn and acquisitions (PLG).}
-Let the planned monthly acquisitions for year $y$ be $a^p_y$ for each PLG tier $p$, and let $m^{\mathrm{PLG}}_t$ be the acquisition multiplier (policy below). Then:
-\begin{align}
-c^p_t 
-  &= (1-\delta_{\mathrm{PLG}})\, c^p_{t-1} + m^{\mathrm{PLG}}_t \, a^p_{y(t)}, 
-  \qquad p \in \mathcal{P}.
-\end{align}
-
-\paragraph{Monthly update with churn and quarterly smoothing (enterprise).}
-Let yearly enterprise deals be $A^{\mathrm{SLG}}_{y}$. Define the quarterly indicator
-\[
-q_t = 
-\begin{cases}
-1, & t \equiv 0 \pmod{3},\\
-0, & \text{otherwise}.
-\end{cases}
-\]
-Then:
-\begin{align}
-c^{\mathrm{ent}}_t 
-  &= (1-\delta^{\mathrm{monthly}}_{\mathrm{SLG}})\, c^{\mathrm{ent}}_{t-1}
-     + q_t \cdot \frac{A^{\mathrm{SLG}}_{y(t)}}{4}.
-\end{align}
-
-\subsection{Revenue Components}
-\paragraph{Base MRR from subscriptions.}
-\begin{align}
-\mathrm{MRR}^{\mathrm{PLG}}_t &= \sum_{p \in \mathcal{P}} c^p_t \, P_p,\\
-\mathrm{MRR}^{\mathrm{SLG}}_t &= c^{\mathrm{ent}}_t \, P_{\mathrm{ent}}.
-\end{align}
-
-\paragraph{Add-on MRR (share-of-active interpretation).}
-For each PLG tier $p$, expected add-on pods among actives: $c^p_t \cdot r_p \cdot \bar{n}_p$. Hence:
-\begin{align}
-\mathrm{MRR}^{\mathrm{addons}}_t 
-  &= \sum_{p \in \mathcal{P}} \bigl(c^p_t \, r_p \, \bar{n}_p\bigr)\, P_{\mathrm{pod}}.
-\end{align}
-
-\paragraph{Store revenue (one-off; excluded from MRR).}
-Let total active customers $C^{\mathrm{tot}}_t = \sum_{p \in \mathcal{P}} c^p_t + c^{\mathrm{ent}}_t$. Then:
-\begin{align}
-R^{\mathrm{store}}_t 
-  &= C^{\mathrm{tot}}_t \cdot \rho \cdot \bar{u} \cdot P_{\mathrm{store}}.
-\end{align}
-
-\paragraph{Recurring MRR and total monthly revenue.}
-\begin{align}
-\mathrm{MRR}^{\mathrm{rec}}_t 
-  &= \mathrm{MRR}^{\mathrm{PLG}}_t + \mathrm{MRR}^{\mathrm{SLG}}_t + \mathrm{MRR}^{\mathrm{addons}}_t,\\
-R^{\mathrm{tot}}_t 
-  &= \mathrm{MRR}^{\mathrm{rec}}_t + R^{\mathrm{store}}_t.
-\end{align}
-
-\subsection{P\&L, Cash, Burn, Runway}
-\paragraph{Monthly net result and cash balance.}
-\begin{align}
-\Pi_t &= R^{\mathrm{tot}}_t - C^{\mathrm{monthly}}_t,\\
-B_t &= B_{t-1} + \Pi_t, \qquad B_0 = \text{INITIAL\_CAPITAL}.
-\end{align}
-
-\paragraph{Burn and moving-average runway (window $W$).}
-\begin{align}
-\mathrm{Burn}_t &= \max\{0,\ -\Pi_t\},\\
-\overline{\mathrm{Burn}}_t 
-  &= 
-  \begin{cases}
-    \dfrac{1}{N_t} \sum_{j=t-W+1}^{t} \mathbf{1}_{\{\mathrm{Burn}_j>0\}}\, \mathrm{Burn}_j, & \text{if } N_t>0,\\[6pt]
-    0, & \text{if } N_t=0,
-  \end{cases}\\
-\mathrm{Runway}_t 
-  &= 
-  \begin{cases}
-    \dfrac{B_t}{\overline{\mathrm{Burn}}_t}, & \overline{\mathrm{Burn}}_t > 0,\\[6pt]
-    \infty, & \overline{\mathrm{Burn}}_t = 0,
-  \end{cases}
-\end{align}
-where $N_t=\sum_{j=t-W+1}^{t}\mathbf{1}_{\{\mathrm{Burn}_j>0\}}$ is the count of positive-burn months in the window.
-
-\subsection{Break-even and Reserve}
-\paragraph{Operational and cash break-even (first month that satisfies).}
-\begin{align}
-t^{\mathrm{BE\_op}} 
-  &= \min\{\, t \mid \mathrm{MRR}^{\mathrm{rec}}_t \ge C^{\mathrm{monthly}}_t \,\},\\
-t^{\mathrm{BE\_cash}} 
-  &= \min\{\, t \mid \Pi_t \ge 0 \,\}.
-\end{align}
-
-\paragraph{Cumulative burn to cash break-even and reserve.}
-\begin{align}
-\mathrm{Burn}^{\mathrm{cum}}_{\le t^{\mathrm{BE\_cash}}} 
-  &= \sum_{j=1}^{t^{\mathrm{BE\_cash}}} \max\{0,\ -\Pi_j\},\\
-\mathrm{Reserve}
-  &= \text{INITIAL\_CAPITAL} - \mathrm{Burn}^{\mathrm{cum}}_{\le t^{\mathrm{BE\_cash}}}.
-\end{align}
-
-\subsection{Policy Gates (Spend \& Acquisition Multipliers)}
-\paragraph{Spend gate (applied to next month’s cost).}
-With guardrail $R_{12}$ months and spend cut $\gamma$:
-\begin{align}
-s_t 
-  &= 
-  \begin{cases}
-    1-\gamma, & \mathrm{Runway}_{t-1} < R_{12},\\
-    1, & \text{otherwise.}
-  \end{cases}
-\end{align}
-
-\paragraph{PLG soft-freeze (applied to current month acquisitions).}
-With soft-freeze threshold $R_{9}$ months:
-\begin{align}
-m^{\mathrm{PLG}}_t 
-  &= 
-  \begin{cases}
-    0.7, & \mathrm{Runway}_{t-1} < R_{9},\\
-    1, & \text{otherwise.}
-  \end{cases}
-\end{align}
-
-\subsection{Mapping from Code to Symbols (for clarity)}
-\begin{itemize}
-  \item $P_{\mathrm{ent}} = \texttt{PRICES['enterprise\_mrr']}$, $P_p=\texttt{PRICES['standard'|'business'|'scale']}$, $P_{\mathrm{pod}}=\texttt{PRICES['add\_on\_pod']}$.
-  \item $\delta_{\mathrm{PLG}}=\texttt{CHURN\_PLG\_MONTHLY}$, $\delta^{\mathrm{annual}}_{\mathrm{SLG}}=\texttt{CHURN\_SLG\_ANNUAL}$.
-  \item $r_p,\ \bar{n}_p$ from \texttt{ADD\_ON\_ADOPTION[plan]['adoption\_rate'|'avg\_pods']}.
-  \item $\rho,\ \bar{u},\ P_{\mathrm{store}}$ from \texttt{STORE\_REVENUE}.
-  \item $a^p_y$ from \texttt{ACQUISITION\_PLG[y]} tuples; $A^{\mathrm{SLG}}_y$ from \texttt{ACQUISITION\_SLG[y]}.
-  \item $u_k$ from \texttt{UPLIFT} and $\mathrm{Cost}_{k,y}$ from the respective cost dictionaries.
-  \item $s_t$ controlled by \texttt{SPEND\_CUT\_PERCENTAGE} and \texttt{RUNWAY\_GUARDRAIL}; $m^{\mathrm{PLG}}_t$ by \texttt{ACQ\_DAMPING\_WHEN\_SOFT\_FREEZE} and \texttt{RUNWAY\_SOFT\_FREEZE}.
-\end{itemize}
-
-\newpage
-\subsection{Break-even Analysis: Chart}
-\begin{figure}[H]
-    \centering 
-    \includegraphics[width=\textwidth]{financial_projection.png}
-    \caption{Break-even analysis: PLG vs. SLG MRR, monthly costs, and runway.}
-    \label{fig:break_even_analysis}
-\end{figure} 
-\subsection{Break-even Analysis: Chart Interpretation}
-
-\paragraph{Legend (quick read)}
-\begin{itemize}
-  \item \textbf{Green (PLG -- Plans + Add-ons):} self-service recurring revenue.
-  \item \textbf{Blue (SLG -- Enterprise):} enterprise recurring revenue; grows in quarterly ``steps'' because annual deals are smoothed across quarters.
-  \item \textbf{Red dashed:} monthly operating cost (with prudential uplifts), rising in yearly steps.
-  \item \textbf{Purple dotted:} runway (months), computed as cash divided by the 3-month moving average burn.
-  \item \textbf{Vertical lines:} operational break-even (blue, month~51) and cash break-even (black, month~51).
-\end{itemize}
-
-\paragraph{Narrative}
-In the first three years the chart shows a patient build. The green PLG area rises steadily as monthly sign-ups compound (after churn) and add-ons add incremental MRR. The blue SLG area climbs in visible quarterly steps when enterprise contracts are booked. Costs move in blocks: each new year adds planned capacity (teams, infra, G\&A with uplifts), so the red line jumps and then stays flat until the next step.
-
-These dynamics match the year-end figures. At the end of year~1, costs are \textbf{€122{,}186}/month versus \textbf{€10{,}948}/month of recurring MRR (loss \textbf{€111{,}122}/month, cash \textbf{€5{,}752{,}467}, runway \textbf{51.1} months). By year~2: \textbf{€154{,}120} vs.\ \textbf{€53{,}194} (loss \textbf{€100{,}562}/month), cash \textbf{€4{,}298{,}389}, runway \textbf{40.6} months. By year~3: \textbf{€216{,}434} vs.\ \textbf{€135{,}360} (loss \textbf{€80{,}319}/month), cash \textbf{€2{,}842{,}778}, runway \textbf{31.1} months. The curve of revenues clearly closes the gap to costs while cash remains controlled: the \textbf{minimum observed runway is 25.2 months} and the \textbf{peak monthly burn} is \textbf{€160{,}111}.
-
-In year~4 the gap narrows decisively. The larger SLG steps make the blue area expand faster and the stack (PLG+SLG) nearly meets the cost line. Year-end: costs \textbf{€224{,}334}/month versus recurring MRR \textbf{€218{,}614}/month (total revenue \textbf{€219{,}615}/month), a near-flat loss of \textbf{€4{,}719}/month, cash \textbf{€2{,}262{,}681}. The purple runway line starts to spike because the moving-average burn approaches zero.
-
-Break-even arrives in \textbf{month 51}. At that point \textbf{recurring MRR is €247{,}103} against \textbf{€232{,}959} of costs (operational BE), and \textbf{total revenue €248{,}159} exceeds costs (cash BE). To get there the model \textbf{burns €4{,}915{,}427} in total, with a \textbf{minimum cash} of \textbf{€2{,}234{,}573} that also represents the \textbf{reserve at BE (31.3\% of the round)}. By the end of year~5, recurring MRR reaches \textbf{€326{,}645}/month (≈ \textbf{€3.92M ARR}), monthly profit is \textbf{€94{,}877}, cash is \textbf{€2{,}700{,}599}, and the runway becomes effectively infinite (no further burn).
-
-\paragraph{Takeaway}
-The chart makes three things obvious: (i) \emph{who pushes what}---PLG builds the base, SLG closes the gap; (ii) \emph{why costs jump}---deliberate capacity steps with prudential uplifts; and (iii) \emph{how cash stays protected}---runway never collapses (min 25.2 months) and accelerates as the revenue stack overtakes costs, exactly as the printed metrics report.
-
+\begin{table}[H]
+\centering
+\caption{Break-even projection with moderate churn assumptions}
+\label{tab:break_even_moderate_churn}
+\begin{tabularx}{\textwidth}{@{}l c c >{\raggedleft\arraybackslash}X
+                                    >{\raggedleft\arraybackslash}X
+                                    >{\raggedleft\arraybackslash}X@{}}
+\toprule
+\textbf{End of period} &
+\textbf{Pro cust.} &
+\textbf{Ent.\ cust.} &
+\textbf{Estimated MRR} &
+\textbf{Monthly cost} &
+\textbf{Deficit / surplus} \\
+\midrule
+End Year 1  & $\sim$11  & 6  & \euro{}\,12\,200  & \euro{}\,59\,600  & \textbf{–}\,47\,400 \\
+End Year 2  & $\sim$41  & 18 & \euro{}\,39\,100  & \euro{}\,91\,250  & \textbf{–}\,52\,100 \\
+End Year 3  & $\sim$97  & 42 & \euro{}\,91\,600  & \euro{}\,147\,900 & \textbf{–}\,56\,300 \\
+Mid-Year 4  & $\sim$143 & 59 & \euro{}\,131\,800 & \euro{}\,165\,000 & \textbf{–}\,33\,200 \\
+End Year 4  & $\sim$183 & 77 & \euro{}\,171\,000 & \euro{}\,165\,000 & \textbf{+}\,6\,000  \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \subsection{Conclusion}
-Based on this quite-aggressive but plausible growth model, the operational break-even point will likely be reached \textbf{during the fourth year of activity}.
+Based on this aggressive but plausible growth model, the operational break-even point will likely be reached **during the fourth year of activity**.
 
-\subsubsection{Strategic Implications for Investors}
+\subsubsection*{Strategic Implications for Investors}
 \begin{itemize}
     \item \textbf{Focus on Growth, not Short-Term Profitability:} This plan is consistent with a Venture Capital-backed strategy, where the goal of the initial funding rounds is to capture significant market share, not to achieve immediate sustainability.
     \item \textbf{Importance of Key Metrics:} The validity of this projection is entirely dependent on the team's ability to achieve the hypothesized acquisition and retention metrics. MVP KPIs (Activation Rate, 1-Month Retention) will be crucial to demonstrate that the growth engine is working as planned.
@@ -895,22 +634,8 @@ Based on this quite-aggressive but plausible growth model, the operational break
 \end{itemize}
 In summary, the model demonstrates a path to long-term sustainability but also underscores the capital-intensive nature of a strategy that aims to build a market leader in a competitive sector.
 
-\section{Why CNY 59{,}829{,}055 is the right amount}
 
-We request \textbf{CNY 59{,}829{,}055} (≈ €7.15M) because this is exactly the amount of capital that, in our \emph{conservative} scenario, takes the company to \textbf{operational and cash break-even in month 51} without forcing growth and while preserving a concrete safety margin. The simulation results are explicit: \textbf{cumulative burn to cash break-even = €4{,}915{,}427}, \textbf{cash on hand at break-even = €2{,}234{,}573} (i.e., \textbf{31.3\%} of the round), \textbf{minimum runway along the path = 25.2 months} (3-month moving average), and \textbf{peak monthly burn = €160{,}111}. We are asking for the right amount the model shows as \emph{necessary and sufficient} to reach break-even with a structural contingency buffer.
-
-The plan is built to be resilient: costs are not ``bare-bones'' but \textbf{prudentially uplifted} by category (infrastructure, G\&A, PLG, SLG, R\&D, management) to capture recurring items that are often underestimated (enterprise support, audits, legal, recruiting, monitoring). In addition, the model introduces \textbf{automatic guardrails}: if runway drops below 12 months, \textbf{discretionary costs are cut by 10\%} the following month; below 9 months, \textbf{paid PLG acquisitions are damped} (multiplier 0.7). These are operational rules encoded in the model, not promises. In practice, the downside is protected by mechanisms that trigger on their own.
-
-On the revenue side, we clearly separate \textbf{PLG} (plans + add-ons) and \textbf{SLG} (enterprise). This is not cosmetic: it lets us see, month by month, where spend levers return more and rebalance without ideology. With this mix and current prices, \textbf{operational break-even} arrives in \textbf{month 51} with \textbf{recurring MRR of €247{,}103} against \textbf{monthly costs of €232{,}959}; in the same month, \textbf{cash break-even} is achieved because \textbf{total revenue (€248{,}159)} exceeds costs. By the end of year 5, recurring MRR reaches \textbf{€326{,}645} (≈ \textbf{€3.92M ARR}). In terms of capital efficiency, the \textbf{implicit burn multiple} (burn to break-even / ARR at break-even) is \textbf{~1.66x}: consistent with a conservative product+go-to-market build and with costs already uplifted credibly.
-
-Why, then, \emph{this} amount and not less? With less capital, the model would trigger guardrails more frequently, creating operational stop-and-go (cuts/cooling periods) that stretch timelines and raise opportunity cost precisely when continuity matters most. Why not more? Because beyond this threshold the bottleneck is not budget but \textbf{channel absorption} and the natural cadence of enterprise delivery; extra cash today would increase dilution without improving outcomes relative to the model.
-
-\textbf{Use of proceeds} remains anchored to the very categories in the simulation and their uplifts: product/R\&D (hardening, observability, security), infrastructure \& enterprise support, SLG (account, solutions/POC), PLG (content/SDK/community), partner enablement, G\&A \& compliance, management. We are not opening new spend lines: we are funding what the model already measures month by month. If required, we can present a breakdown in \textbf{CNY} mapped 1:1 to the cost dictionaries in the code.
-
-Finally, the \textbf{risk profile} is readable. Minimum runway does not fall below \textbf{25.2 months}, guardrails limit cash erosion when needed, and the \textbf{31.3\%} buffer at break-even provides headroom against procurement delays, infra/compliance spend variability, or FX moves. At the same time, the PLG/SLG separation makes it straightforward—even ex post—to show that capital allocation followed realized returns rather than a one-size-fits-all plan.
-
-\textbf{In short:} \textbf{CNY 59{,}829{,}055} fully finances the conservative path to break-even, with sufficient buffer and automated cost discipline. It is a proportional, defensible, and—above all—\textbf{replicable} ask: investors can verify month by month that model metrics remain under control and that cash tracks the expected trajectory.
-
+\subsection{Revenue Streams}
 
 
 \section{Go-to-Market Strategy}
@@ -1078,14 +803,14 @@ These two engines are designed to be mutually reinforcing: the success of the PL
 \clearpage
 \section{Operations Plan}
 % Come funzionerà l'azienda giorno per giorno.
-\subsection{Introduction}
+\subsection*{Introduction}
 This document outlines the operational plan to execute IntellyHub's development and go-to-market strategy. The plan is aligned with the phases of the Product Development Roadmap and describes the key activities for each functional area of the company.
 
 % --- PHASE 1 ---
 \subsection{Phase 1: Foundation and Validation (Quarters 1-2)}
 \textbf{Strategic Objective:} To transform the prototype into a stable and secure MVP, acquire the first early adopters, and \textbf{validate the core product and pricing model hypotheses through a targeted partnership program.}
 
-\subsubsection{Product Development \& Engineering}
+\subsubsection*{Product Development \& Engineering}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q1:}
     \begin{itemize}
@@ -1101,7 +826,7 @@ This document outlines the operational plan to execute IntellyHub's development 
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Go-to-Market (Marketing \& Sales)}
+\subsubsection*{Go-to-Market (Marketing \& Sales)}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q1:}
     \begin{itemize}
@@ -1115,7 +840,7 @@ This document outlines the operational plan to execute IntellyHub's development 
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Community \& Ecosystem Management}
+\subsubsection*{Community \& Ecosystem Management}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q1:}
     \begin{itemize}
@@ -1128,7 +853,7 @@ This document outlines the operational plan to execute IntellyHub's development 
     \end{itemize}
 \end{itemize}
 
-\subsubsection{General \& Corporate Operations}
+\subsubsection*{General \& Corporate Operations}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q1:}
     \begin{itemize}
@@ -1147,7 +872,7 @@ This document outlines the operational plan to execute IntellyHub's development 
 \subsection{Phase 2: Expansion and Growth (Quarters 3-4)}
 \textbf{Strategic Objective:} To scale user acquisition, expand the ecosystem, and implement the necessary enterprise features for monetization, based on the data validated in Phase 1.
 
-\subsubsection{Product Development \& Engineering}
+\subsubsection*{Product Development \& Engineering}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q3:}
     \begin{itemize}
@@ -1161,7 +886,7 @@ This document outlines the operational plan to execute IntellyHub's development 
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Go-to-Market (Marketing \& Sales)}
+\subsubsection*{Go-to-Market (Marketing \& Sales)}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q3:}
     \begin{itemize}
@@ -1181,7 +906,7 @@ This document outlines the operational plan to execute IntellyHub's development 
 \subsection{Phase 3: Leadership and Innovation (Quarters 5-6)}
 \textbf{Strategic Objective:} To establish market leadership, create a network effect through the community, and **leverage data to build an insurmountable competitive advantage.**
 
-\subsubsection{Product Development \& Engineering}
+\subsubsection*{Product Development \& Engineering}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q5:}
     \begin{itemize}
@@ -1196,7 +921,7 @@ This document outlines the operational plan to execute IntellyHub's development 
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Go-to-Market (Marketing \& Sales)}
+\subsubsection*{Go-to-Market (Marketing \& Sales)}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Q5:}
     \begin{itemize}
@@ -1210,7 +935,7 @@ This document outlines the operational plan to execute IntellyHub's development 
 \end{itemize}
 
 \section{Product Development Roadmap} % This section provides a detailed roadmap for the development of IntellyHub, outlining the strategic objectives and key activities for each phase of the product lifecycle. The roadmap is designed to ensure that the product evolves in a structured manner, addressing both immediate needs and long-term goals.
-\subsection{Introduction}
+\subsection*{Introduction}
 This roadmap outlines the planned development phases for IntellyHub, starting from its current state as an advanced prototype. The goal is to evolve the product into a robust, scalable, and market-leading platform. The roadmap is divided into four-month periods (Quarters) to provide a clear strategic vision.
 
 \clearpage
@@ -1219,7 +944,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
 \subsection{Phase 1: From Prototype to Robust MVP (Quarters 1-2)}
 \textbf{Strategic Objective:} To transform the prototype into a stable, secure Minimum Viable Product (MVP) ready for its first early adopters.
 
-\subsubsection{Quarter 1 (Months 1-4): Stabilization and Foundations}
+\subsubsection*{Quarter 1 (Months 1-4): Stabilization and Foundations}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
@@ -1239,7 +964,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Quarter 2 (Months 5-8): Initial Launch and Feedback}
+\subsubsection*{Quarter 2 (Months 5-8): Initial Launch and Feedback}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
@@ -1267,7 +992,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
 \subsection{Phase 2: Expansion and Growth (Quarters 3-4)}
 \textbf{Strategic Objective:} To use feedback from early adopters to improve the product, expand the ecosystem, and begin implementing enterprise features.
 
-\subsubsection{Quarter 3 (Months 9-12): Optimization and Adoption}
+\subsubsection*{Quarter 3 (Months 9-12): Optimization and Adoption}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
@@ -1290,7 +1015,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Quarter 4 (Months 13-16): Enterprise Features}
+\subsubsection*{Quarter 4 (Months 13-16): Enterprise Features}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
@@ -1317,7 +1042,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
 \subsection{Phase 3: Leadership and Innovation (Quarters 5-6)}
 \textbf{Strategic Objective:} To consolidate market position, open the platform to the community, and introduce innovative features based on data and AI.
 
-\subsubsection{Quarter 5 (Months 17-20): Ecosystem and Community}
+\subsubsection*{Quarter 5 (Months 17-20): Ecosystem and Community}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
@@ -1331,7 +1056,7 @@ This roadmap outlines the planned development phases for IntellyHub, starting fr
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Quarter 6 (Months 21-24): Intelligence and Optimization}
+\subsubsection*{Quarter 6 (Months 21-24): Intelligence and Optimization}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Core Platform \& Backend:}
     \begin{itemize}
