@@ -1,80 +1,80 @@
+\delta^{\mathrm{monthly}}_{\mathrm{SLG}} 
+  &= 1 - \bigl(1 - \delta^{\mathrm{annual}}_{\mathrm{SLG}}\bigr)^{1/12}.
+\end{align}
 
-% --- PHASE 3 ---
-\subsection{Phase 3: Leadership and Innovation (Quarters 5-6)}
-\textbf{Strategic Objective:} To consolidate market position, open the platform to the community, and introduce innovative features based on data and AI.
+\paragraph{Monthly update with churn and acquisitions (PLG).}
+Let the planned monthly acquisitions for year $y$ be $a^p_y$ for each PLG tier $p$, and let $m^{\mathrm{PLG}}_t$ be the acquisition multiplier (policy below). Then:
+\begin{align}
+c^p_t 
+  &= (1-\delta_{\mathrm{PLG}})\, c^p_{t-1} + m^{\mathrm{PLG}}_t \, a^p_{y(t)}, 
+  \qquad p \in \mathcal{P}.
+\end{align}
 
-\subsubsection*{Quarter 5 (Months 17-20): Ecosystem and Community}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Core Platform \& Backend:}
-    \begin{itemize}
-        \item Open the Store APIs to allow submission of automations and plugins from the community.
-        \item Implement a moderation and validation system for external contributions.
-    \end{itemize}
-    \item \textbf{Frontend \& IDE:}
-    \begin{itemize}
-        \item Develop the interface for submitting and managing contributions in the store.
-        \item Add a review and rating system.
-    \end{itemize}
-\end{itemize}
+\paragraph{Monthly update with churn and quarterly smoothing (enterprise).}
+Let yearly enterprise deals be $A^{\mathrm{SLG}}_{y}$. Define the quarterly indicator
+\[
+q_t = 
+\begin{cases}
+1, & t \equiv 0 \pmod{3},\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+Then:
+\begin{align}
+c^{\mathrm{ent}}_t 
+  &= (1-\delta^{\mathrm{monthly}}_{\mathrm{SLG}})\, c^{\mathrm{ent}}_{t-1}
+     + q_t \cdot \frac{A^{\mathrm{SLG}}_{y(t)}}{4}.
+\end{align}
 
-\subsubsection*{Quarter 6 (Months 21-24): Intelligence and Optimization}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Core Platform \& Backend:}
-    \begin{itemize}
-        \item Develop an "Observability" system to collect and aggregate automation performance metrics.
-    \end{itemize}
-    \item \textbf{Frontend \& IDE:}
-    \begin{itemize}
-        \item Create an "Analytics" dashboard to allow users to analyze the performance and costs of their automations.
-    \end{itemize}
-    \item \textbf{AI Assistant:}
-    \begin{itemize}
-        \item Introduce proactive features: the AI suggests optimizations, detects anomalies, and proposes fixes for failing flows (auto-healing).
-    \end{itemize}
-\end{itemize}
-\subsection{Customer Support}
-Our customer support model is designed to be lean, scalable, and a showcase for our own technology. Support will be managed directly by the resources outlined in our hiring roadmap.
+\subsection{Revenue Components}
+\paragraph{Base MRR from subscriptions.}
+\begin{align}
+\mathrm{MRR}^{\mathrm{PLG}}_t &= \sum_{p \in \mathcal{P}} c^p_t \, P_p,\\
+\mathrm{MRR}^{\mathrm{SLG}}_t &= c^{\mathrm{ent}}_t \, P_{\mathrm{ent}}.
+\end{align}
 
-Initially, support is provided by the core technical team (Founders and Developers) through community channels like Discord/Slack. This hands-on approach maximizes our learning from early adopters. As we hire our first Customer Success Specialist in year two, we will introduce a structured ticketing system with guaranteed SLAs for paying Pro and Enterprise customers, while the Developer Advocate nurtures the community channel.
+\paragraph{Add-on MRR (share-of-active interpretation).}
+For each PLG tier $p$, expected add-on pods among actives: $c^p_t \cdot r_p \cdot \bar{n}_p$. Hence:
+\begin{align}
+\mathrm{MRR}^{\mathrm{addons}}_t 
+  &= \sum_{p \in \mathcal{P}} \bigl(c^p_t \, r_p \, \bar{n}_p\bigr)\, P_{\mathrm{pod}}.
+\end{align}
 
-The cornerstone of our strategy is leveraging IntellyHub itself to automate our support operations. We will build an internal workflow that uses an AI plugin to automatically triage incoming tickets, search our knowledge base for answers, and handle first-level inquiries. This automation allows our human support staff to focus exclusively on complex, high-value customer issues, ensuring a premium support experience while maintaining a lean operational cost structure.
+\paragraph{Store revenue (one-off; excluded from MRR).}
+Let total active customers $C^{\mathrm{tot}}_t = \sum_{p \in \mathcal{P}} c^p_t + c^{\mathrm{ent}}_t$. Then:
+\begin{align}
+R^{\mathrm{store}}_t 
+  &= C^{\mathrm{tot}}_t \cdot \rho \cdot \bar{u} \cdot P_{\mathrm{store}}.
+\end{align}
 
+\paragraph{Recurring MRR and total monthly revenue.}
+\begin{align}
+\mathrm{MRR}^{\mathrm{rec}}_t 
+  &= \mathrm{MRR}^{\mathrm{PLG}}_t + \mathrm{MRR}^{\mathrm{SLG}}_t + \mathrm{MRR}^{\mathrm{addons}}_t,\\
+R^{\mathrm{tot}}_t 
+  &= \mathrm{MRR}^{\mathrm{rec}}_t + R^{\mathrm{store}}_t.
+\end{align}
 
-\section{Risk Analysis}
-\subsection{Market Risks}
-\textit{Risks related to the market, competition, and customer adoption.}
+\subsection{P\&L, Cash, Burn, Runway}
+\paragraph{Monthly net result and cash balance.}
+\begin{align}
+\Pi_t &= R^{\mathrm{tot}}_t - C^{\mathrm{monthly}}_t,\\
+B_t &= B_{t-1} + \Pi_t, \qquad B_0 = \text{INITIAL\_CAPITAL}.
+\end{align}
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{@{}lL@{}}
-\toprule
-\textbf{Risk} & \textbf{Description} \\
-\midrule
-\textbf{Competition from the "Status Quo"} & Our biggest competitor is not another platform, but the inertia of developers using custom Python scripts. Their familiarity and the perceived zero initial cost make it a significant hurdle to overcome. \\
-\addlinespace
-\textbf{Slow Enterprise Adoption Cycle} & The on-premise and enterprise sales model is crucial for high-value contracts, but it is characterized by long sales cycles (6-12+ months) and complex proof-of-concept (POC) phases. A delay in closing the first key enterprise deals could significantly impact revenue projections. \\
-\addlinespace
-\textbf{AI Technology Shift} & Our AI is currently positioned as a "copilot." A rapid technological leap by a competitor towards a truly autonomous AI agent that is "good enough" could make our more controlled, structured approach seem less innovative. \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\newpage
-\subsection{Operational Risks}
-\textit{Risks related to technology, personnel, and execution.}
-
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{@{}lL@{}}
-\toprule
-\textbf{Risk} & \textbf{Description} \\
-\midrule
-\textbf{Team Execution \& Key-Person Risk} & The plan relies on hiring a small number of highly specialized individuals. The success of the project is highly dependent on this core team's ability to execute across product, infrastructure, and sales. The departure of a key member could cause significant delays. \\
-\addlinespace
-\textbf{Technological Complexity} & The tech stack (Kubernetes, multi-step AI pipelines, hybrid IDE) is extremely powerful but also complex to maintain and evolve. Bugs, security vulnerabilities, or performance bottlenecks in this complex system can be difficult and costly to resolve. \\
-\addlinespace
-\textbf{Hybrid Technology Risk (IDE/YAML Sync)} & Maintaining a perfect, real-time, bidirectional synchronization between the complex visual IDE and the textual YAML representation is technically demanding. It is a potential source of subtle and hard-to-debug bugs that could affect user trust. \\
-\addlinespace
-\textbf{Ecosystem Quality Control} & The value of the Automation Store and Plugin Marketplace is a double-edged sword. Low-quality, insecure, or poorly maintained community contributions could damage user trust and the platform's reputation. \\
-\bottomrule
-\end{tabularx}
+\paragraph{Burn and moving-average runway (window $W$).}
+\begin{align}
+\mathrm{Burn}_t &= \max\{0,\ -\Pi_t\},\\
+\overline{\mathrm{Burn}}_t 
+  &= 
+  \begin{cases}
+    \dfrac{1}{N_t} \sum_{j=t-W+1}^{t} \mathbf{1}_{\{\mathrm{Burn}_j>0\}}\, \mathrm{Burn}_j, & \text{if } N_t>0,\\[6pt]
+    0, & \text{if } N_t=0,
+  \end{cases}\\
+\mathrm{Runway}_t 
+  &= 
+  \begin{cases}
+    \dfrac{B_t}{\overline{\mathrm{Burn}}_t}, & \overline{\mathrm{Burn}}_t > 0,\\[6pt]
+    \infty, & \overline{\mathrm{Burn}}_t = 0,
+  \end{cases}
+\end{align}

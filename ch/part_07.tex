@@ -1,80 +1,80 @@
+\subsection{SLG Team (Sales, Success \& Partners)}
+We seed an enterprise sales motion with a Senior Account Executive in Year~1, scale to two AEs plus an SDR in Year~2, and add a Solutions Architect in Year~3 (1~$\rightarrow$~3~$\rightarrow$~4 FTEs). Costs: \textbf{\EUR{45{,}000}} (Y1), \textbf{\EUR{127{,}440}} (Y2), \textbf{\EUR{187{,}440}} (Y3).
 
-\section*{Cost Projections \& Team Roadmap (Expanded R\&D Team)}
-This section outlines a revised forecast of operational costs and the hiring roadmap. This version reflects an expanded Research \& Development team in Year 1 to accelerate product completion and ecosystem growth, while running market validation in parallel.
+\subsection{Partner Enablement}
+We launch Partner Enablement in Year~2 with one Technical Account Manager, then grow to two TAMs plus a Partner Manager in Year~3 (0~$\rightarrow$~1~$\rightarrow$~3 FTEs). Costs: \textbf{\EUR{0}} (Y1), \textbf{\EUR{46{,}800}} (Y2), \textbf{\EUR{145{,}600}} (Y3).
 
-Recognizing the need to remain competitive for key roles, monetary compensation will be supplemented by a stock option plan (ESOP). This will allow us to attract high-level profiles, align long-term interests, and optimize initial operational costs.
-
-\subsection*{Hiring Roadmap}
-The team will be built with specialized roles from the start to cover all critical areas of the product and business.
-\begin{itemize}
-    \item \textbf{Year 1 (Foundation \& Early Validation):} Focus on finalizing the core product with a larger, specialized development team, while simultaneously validating market interest with a dedicated commercial role.
-    \begin{itemize}
-        \item Core Founder(s) (Strategic Lead)
-        \item 1 Frontend / UI Developer (Interface Specialist)
-        \item 1 Backend Developer (API Specialist)
-        \item 1 Core Logic Developer (Automation Engine Specialist)
-        \item 1 Plugin / Ecosystem Developer
-        \item 1 DevOps Engineer (Infrastructure Specialist)
-        \item 1 Sales / Business Development Representative (Commercial Lead)
-    \end{itemize}
-    \item \textbf{Year 2 (Expansion):} Build upon the validated model and expand the go-to-market engine.
-    \begin{itemize}
-        \item +1 Generalist Software Developer
-        \item +1 Developer Advocate (Marketing)
-        \item +1 Customer Success Specialist
-    \end{itemize}
-    \item \textbf{Year 3 (Scaling):} Structure the organization for growth with dedicated leadership.
-    \begin{itemize}
-        \item +1 Dedicated Product Manager
-        \item +1 Head of Marketing
-        \item +1 Sales Manager
-        \item +1 Developer Relations (DevRel) Manager
-    \end{itemize}
-\end{itemize}
-
-\subsection*{Estimated Annual Costs}
-The following table provides a revised high-level projection of operational costs based on the expanded team structure and a more aggressive marketing budget.
-
+\subsection{Headcount and Cost Summary (Years 1--3)}
 \begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{L L L L}
-\toprule
-\textbf{Cost Category} & \textbf{Year 1 Estimate} & \textbf{Year 2 Estimate} & \textbf{Year 3 Estimate} \\
-\midrule
-\textbf{Personnel (R\&D)} & €510,000 & €595,000 & €680,000 \\
-(Founder, Developers, DevOps) & (6 FTEs) & (7 FTEs) & (8 FTEs) \\
-\addlinespace
-\textbf{Personnel (GTM)} & €75,000 & €225,000 & €495,000 \\
-(Sales, Marketing, CS, DevRel) & (1 FTE) & (3 FTEs) & (6 FTEs) \\
-\addlinespace
-\textbf{Infrastructure \& Platform} & €30,000 & €75,000 & €150,000 \\
-(Cloud, K8s, LLM APIs, Software Licenses) & & & \\
-\addlinespace
-\textbf{General \& Administrative (G\&A)} & €100,000 & €200,000 & €450,000 \\
-(Legal, Accounting, Sales \& Marketing Budget) & & & \\
-\midrule
-\textbf{Total Estimated Annual Burn} & \textbf{€715,000} & \textbf{€1,095,000} & \textbf{€1,775,000} \\
-\bottomrule
-\end{tabularx}
-\caption{Revised high-level operational cost projections for the expanded team plan. See assumptions below.}
-\label{tab:cost_projections_expanded_team}
+  \centering
+  \small
+  \caption{FTEs and annual personnel cost by function.}
+  \label{tab:hiring-summary}
+  \begin{tabular}{@{}l *{3}{S[table-format=1.0]} *{3}{S[table-format=6.0]}@{}}
+    \toprule
+    \textbf{Function} & \multicolumn{3}{c}{\textbf{FTEs}} & \multicolumn{3}{c}{\textbf{Annual Cost (EUR)}} \\
+    \cmidrule(lr){2-4}\cmidrule(lr){5-7}
+    & \multicolumn{1}{c}{\textbf{Y1}}
+    & \multicolumn{1}{c}{\textbf{Y2}}
+    & \multicolumn{1}{c}{\textbf{Y3}}
+    & \multicolumn{1}{c}{\textbf{Y1}}
+    & \multicolumn{1}{c}{\textbf{Y2}}
+    & \multicolumn{1}{c}{\textbf{Y3}} \\
+    \midrule
+    Management \& Leadership   & 3 & 4 & 5 & 420000 & 453600 & 547200 \\
+    R\&D (Product \& Eng.)     & 8 & 8 & 10 & 362400 & 362400 & 456400 \\
+    PLG (Mktg \& Community)    & 1 & 2 & 3 & 46800  & 85800  & 117000 \\
+    SLG (Sales \& Success)     & 1 & 3 & 4 & 45000  & 127440 & 187440 \\
+    Partner Enablement         & 0 & 1 & 3 & 0      & 46800  & 145600 \\
+    \midrule
+    \textbf{Total}             & \textbf{13} & \textbf{18} & \textbf{25}
+                               & \textbf{874200} & \textbf{1076040} & \textbf{1453640} \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-\paragraph*{Key Assumptions:}
+\subsection{Financial Sustainability (break-even, burn, runway)}
+We assessed the hiring plan against the financial projection simulated in \texttt{breakeven2.py} (prudential uplifts by cost category; Infrastructure \& G\&A included). Key results:
+
 \begin{itemize}
-    \item Personnel costs are fully loaded estimates (including salary, taxes, and benefits), averaging €85k/year for R\&D roles and €75k/year for initial GTM roles.
-    \item \textbf{Infrastructure \& Platform} costs include a buffer for the variable and potentially volatile cost of third-party LLM APIs, which is expected to scale with user engagement of the AI features.
-    \item \textbf{General \& Administrative (G\&A)} costs have been significantly revised upwards to reflect a more aggressive budget for marketing activities (content creation, community building, initial ad spend), sales tools (CRM), and professional services from day one.
-    \item These projections represent the estimated annual operational burn rate and do not include one-off capital expenditures such as hardware for new hires or initial recruiting fees.
+  \item \textbf{Operating break-even:} Month~\textbf{51} (Year~5) --- recurring MRR covers monthly operating cost.
+  \item \textbf{Cash break-even:} Month~\textbf{51} (Year~5).
+  \item \textbf{Total capital burned until cash BE:} \textbf{\EUR{4{,}939{,}370}}.
+  \item \textbf{Monthly peak burn:} \textbf{\EUR{160{,}422}}.
+  \item \textbf{Minimum cash balance during the period:} \textbf{\EUR{2{,}210{,}630}}.
+  \item \textbf{Minimum runway (3-month MA):} \textbf{25.0 months}.
+  \item \textbf{Estimated remaining reserve at cash BE:} \textbf{\EUR{2{,}210{,}630}} (\textbf{30.9\%} of initial \EUR{7.15M}).
 \end{itemize}
 
-\section{Objective of the Analysis}
-This document provides a strategic estimate of when IntellyHub could reach its operational break-even point, defined as the moment when Monthly Recurring Revenue (MRR) equals monthly operational costs. The analysis is based on the aggressive growth plan and its associated cost projections.
+These results indicate a disciplined growth trajectory: personnel expansion is front-loaded to deliver product and market readiness while maintaining ample runway and a meaningful reserve at the break-even threshold.\newline\newline
 
-\section{Cost Assumptions}
-The analysis uses the cost projections from the aggressive growth plan, which includes a specialized team and a significant marketing budget from the first year.
+% --- Tight layout just for this table ---
+\begingroup
+\sisetup{group-separator={}, group-minimum-digits=3}
+\scriptsize
+\setlength{\tabcolsep}{3pt}      % default ~6pt
+\renewcommand{\arraystretch}{1.05}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\newgeometry{left=1.8cm,right=1.8cm} % shrink side margins only here
 
-\subsection*{Estimated Monthly Operational Costs}
-\begin{itemize}
-  \item \textbf{Year 1:} \euro{}\,59\,600 / month (annual burn \euro{}\,715\,000)
-  \item \textbf{Year 2:} \euro{}\,91\,250 / month (annual burn \euro{}\,1\,095\,000)
+\subsection{Hiring Plan Summary}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{4.2cm}
+  S[table-format=6.0]  % Unit EUR
+  S[table-format=7.0]  % Unit CNY
+  S[table-format=2.0]  % HC Y1
+  S[table-format=2.0]  % HC Y2
+  S[table-format=2.0]  % HC Y3
+  S[table-format=7.0]  % EUR Y1
+  S[table-format=8.0]  % CNY Y1
+  S[table-format=7.0]  % EUR Y2
+  S[table-format=8.0]  % CNY Y2
+  S[table-format=7.0]  % EUR Y3
+  S[table-format=8.0]@{}} % CNY Y3
+\caption{Hiring roadmap and project costs (EUR \& CNY). Conversion used: 1~EUR = 8{,}3677~CNY.}\\
+\toprule
+\textbf{Role} &
+\multicolumn{2}{c}{\textbf{Unit cost}} &
+\multicolumn{3}{c}{\textbf{Headcount}} &
+\multicolumn{6}{c}{\textbf{Annual cost}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-6}\cmidrule(lr){7-12}

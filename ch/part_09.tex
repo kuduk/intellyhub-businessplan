@@ -1,80 +1,80 @@
 
-\section{Go-to-Market Strategy}
-% Come raggiungerai i tuoi clienti?
+\restoregeometry
+\endgroup
+% --- End tight layout ---
 
-IntellyHub's Go-to-Market (GTM) strategy is based on a hybrid model that combines two growth engines:
-\begin{enumerate}
-    \item \textbf{Product-Led Growth (PLG) for SaaS:} We leverage the superiority of the product, a Free Tier, and the Automation Store to attract, activate, and convert users in a scalable, bottom-up fashion.
-    \item \textbf{Sales-Led Growth (SLG) for On-Premise \& Enterprise:} We use a targeted, consultative sales approach to win large customers with complex security and governance needs.
-\end{enumerate}
-These two engines are designed to be mutually reinforcing: the success of the PLG motion generates leads and brand awareness for the sales team.
+\section{Cost Structure Analysis and Justification}
+\label{sec:cost-analysis}
 
-% --- Strategic Objectives ---
-\subsection{Strategic Objectives (3-Year Horizon)}
+\subsection{Infrastructure \& Platform Cost Justification}
+
+\subsubsection{Overview}
+Infrastructure \& Platform costs represent a critical investment category for IntellyHub, accounting for 9--15\% of our total operational expenses. These costs scale from \EUR{100{,}000} in Year~1 to \EUR{250{,}000} in Year~3 (\EUR{135{,}000} to \EUR{337{,}500} after prudential uplift), reflecting both our growth trajectory and the strategic advantage of operating from Hangzhou, China.
+
+\subsubsection{Geographic Advantage: Hangzhou Tech Hub}
+Hangzhou's position as China's premier technology hub, home to Alibaba Cloud and numerous AI/ML companies, provides IntellyHub with unique infrastructure advantages:
+
 \begin{itemize}
-    \item \textbf{Positioning:} To become a leading platform for orchestrating complex automations and AI workflows for modern technical teams.
-    \item \textbf{Adoption:} To achieve critical mass of active users and a vibrant community around the plugin ecosystem and the automation store.
-    \item \textbf{Revenue:} To build a sustainable business model with significant Annual Recurring Revenue (ARR), driven by both SaaS subscriptions and enterprise on-premise contracts.
+    \item \textbf{Cloud Infrastructure Costs:} 30--40\% lower than European/US alternatives through local providers (Alibaba Cloud, Tencent Cloud, Huawei Cloud)
+    \item \textbf{Direct Access to Chinese AI Ecosystem:} Low-latency connections to Chinese LLM providers (Baidu ERNIE, Alibaba Qwen, etc.)
+    \item \textbf{Government Subsidies:} Eligible for Hangzhou's tech infrastructure subsidies, potentially reducing costs by 15--20\%
+    \item \textbf{Technical Talent Pool:} Access to infrastructure engineers at 40--50\% of Silicon Valley costs
 \end{itemize}
 
-% --- YEAR 1 ---
-\subsection{Year 1: Foundation \& Market Validation}
-\textbf{Main Focus:} Winning over early adopters, validating product-market fit, and securing the first key reference customers (both SaaS and On-Premise). In this phase, many activities are manual and "do not scale."
+\subsubsection{Detailed Infrastructure Breakdown}
 
-\newpage
-\begin{table}[H]
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabularx}{\textwidth}{L L L} 
-\toprule
-\textbf{Key Channels} & \textbf{Concrete Actions} & \textbf{Success KPIs} \\
+\paragraph{Year 1 (\EUR{100{,}000} base / \EUR{135{,}000} uplifted)}
 
-\midrule
-\textbf{Product-Led Growth (PLG)} & 
-\textbf{Niche Launch:} Present IntellyHub on platforms like Product Hunt, Hacker News, and relevant technical subreddits (e.g., r/devops, r/kubernetes).\newline\newline
-\textbf{Automation Store:} Populate the store with 20-30 high-quality official templates that solve real, painful problems.
-&
-\textbf{Activation Rate:} >25\% (users running their first automation within 7 days).\newline\newline
-\textbf{1-Month Retention:} >15\% (users returning after 4 weeks).
-\\
-\addlinespace
+\begin{itemize}
+    \item \textbf{Core Platform Infrastructure} (\EUR{25{,}000}):
+    \begin{itemize}
+        \item 3 master nodes + 5--10 worker nodes on Alibaba Cloud ACK
+        \item Auto-scaling configuration for pod execution
+        \item High-availability setup across multiple availability zones
+    \end{itemize}
+    
+    \item \textbf{Development \& Staging Environments} (\EUR{15{,}000}):
+    \begin{itemize}
+        \item Separate K8s clusters for development and staging
+        \item CI/CD pipeline infrastructure (GitLab/Jenkins)
+    \end{itemize}
+    
+    \item \textbf{Data Infrastructure} (\EUR{20{,}000}):
+    \begin{itemize}
+        \item PostgreSQL clusters for metadata (RDS)
+        \item Redis clusters for caching and queuing
+        \item S3-compatible object storage for artifacts (OSS)
+        \item Vector database infrastructure for AI/RAG (Milvus/Pinecone)
+    \end{itemize}
+    
+    \item \textbf{Networking \& Security} (\EUR{15{,}000}):
+    \begin{itemize}
+        \item CDN services for global content delivery
+        \item DDoS protection and WAF
+        \item VPN and secure connectivity solutions
+        \item SSL certificates and security scanning tools
+    \end{itemize}
+    
+    \item \textbf{Monitoring \& Observability} (\EUR{10{,}000}):
+    \begin{itemize}
+        \item Prometheus/Grafana stack
+        \item Log aggregation (ELK stack or cloud equivalent)
+        \item APM tools (DataDog/New Relic starter tier)
+        \item Error tracking (Sentry)
+    \end{itemize}
+    
+    \item \textbf{AI/ML Infrastructure} (\EUR{15{,}000}):
+    \begin{itemize}
+        \item GPU instances for model inference
+        \item Model serving infrastructure (TorchServe/TensorFlow Serving)
+        \item LLM API costs for AI assistant
+    \end{itemize}
+\end{itemize}
 
-\textbf{Technical Content Marketing} & 
-\textbf{Blog \& Tutorials:} Publish 2-4 in-depth technical articles per month showcasing how to solve specific problems with IntellyHub.\newline\newline
-\textbf{Video Content:} Create concise video tutorials.
-&
-\textbf{Qualified Traffic:} Number of site visits from organic and referral channels.\newline\newline
-\textbf{Visitor-to-Signup Rate:} >2\%.
-\\
-\addlinespace
-
-\textbf{Community Building} &
-\textbf{Discord/Slack Channel:} Establish a central hub for early users.\newline\newline
-\textbf{Founder-led Support:} Personally answer every question and feedback request to build a strong rapport.
-&
-\textbf{Community Engagement:} Weekly active members, peer-to-peer support interactions.\newline\newline
-\textbf{Qualitative Feedback:} Minimum of 5 in-depth user interviews per month.
-\\
-\addlinespace
-
-\textbf{Founder-Led Sales (On-Premise)} &
-\textbf{Leverage Network:} Founders personally manage the first 3-5 sales processes with target companies from their own network.\newline\newline
-\textbf{Proof of Concept (POC):} Focus on the success of a few high-value POCs.
-&
-\textbf{POCs Initiated:} 3-5 throughout the year.\newline\newline
-\textbf{On-Premise Contracts Signed:} 1-2 key reference customers.
-\\
-\bottomrule
-\end{tabularx}
-}
-\end{table}
-
-
-% --- YEAR 2 ---
-\subsection{Year 2: Expansion \& Building a Repeatable Growth Engine}
-\textbf{Main Focus:} Transforming initial value into scalable, repeatable processes. Optimizing what worked in Year 1 and building the foundation of a commercial team.
-
-\begin{table}[H]
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabularx}{\textwidth}{L L L}
+\paragraph{Year 2 (\EUR{200{,}000} base / \EUR{270{,}000} uplifted)}
+Scaling for growth includes:
+\begin{itemize}
+    \item \textbf{Production Cluster Expansion} (+\EUR{40{,}000}): Scale to 20--30 worker nodes
+    \item \textbf{Enhanced Data Platform} (+\EUR{30{,}000}): Data warehouse, streaming infrastructure
+    \item \textbf{Enterprise Features} (+\EUR{20{,}000}): Private cloud configurations, compliance infrastructure
+    \item \textbf{Performance Optimization} (+\EUR{10{,}000}): Global CDN expansion, database tuning

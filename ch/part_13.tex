@@ -1,80 +1,80 @@
-    \end{itemize}
-    \item \textbf{Ecosystem:}
-    \begin{itemize}
-        \item Develop and document the first 10-15 essential "official" plugins.
-    \end{itemize}
+\section{Break-Even Analysis}
+\subsection{Overview of the financial simulation model}
+\label{subsec:simple-model}
+
+This subsection explains the model in plain language. It describes what goes in, what comes out, and the small set of rules the simulation follows month by month.
+
+\paragraph{What the model answers:}
+It estimates, over 5 years (60 months): monthly revenues, costs, net profit/loss, cash balance, runway, and the month when we reach break-even. It also separates PLG (self-service) and SLG (enterprise) revenues.
+
+\paragraph{Main inputs:}
+\begin{itemize}
+\item \textbf{Starting cash:} the initial capital available at month 0.
+\item \textbf{Costs per category and year:} Management, R\&D, PLG, SLG, Partner, Infrastructure, G\&A. Each category has an \emph{uplift} multiplier to account for prudential overhead (compliance, legal, recruiting, cloud, etc.).
+\item \textbf{Prices:} monthly list prices for Standard, Business, Scale, and an average monthly enterprise MRR (ACV/12). Add-on pods have a unit price.
+\item \textbf{Customer dynamics:} monthly PLG acquisitions per tier for each year; yearly enterprise (SLG) deals; churn rates (PLG monthly, SLG annual converted to monthly).
+\item \textbf{Add-ons and store:} per-tier adoption rate and average pods; store one-off revenue assumptions (rate, items, average price).
+\item \textbf{Policy gates (optional):} cost cut when runway is low, and temporary reduction of PLG acquisitions when runway is very low.
 \end{itemize}
 
-\subsubsection*{Quarter 2 (Months 5-8): Initial Launch and Feedback}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Core Platform \& Backend:}
-    \begin{itemize}
-        \item Implement the authentication and user management system (basic multi-tenancy).
-        \item Develop the APIs for the Automation Store (read-only).
-    \end{itemize}
-    \item \textbf{Frontend \& IDE:}
-    \begin{itemize}
-        \item Develop the interface for the Automation Store (browsing and installation).
-        \item Create a guided onboarding process for new users.
-    \end{itemize}
-    \item \textbf{AI Assistant:}
-    \begin{itemize}
-        \item Launch the "v1" of the AI assistant, focused on generating YAML from natural language prompts.
-    \end{itemize}
-    \item \textbf{Go-to-Market:}
-    \begin{itemize}
-        \item Launch the Free Tier and begin niche marketing activities (Product Hunt, etc.).
-    \end{itemize}
+\paragraph{Monthly cycle (what happens each month):}
+\begin{enumerate}
+\item \textbf{Apply churn at the start of the month.} We reduce the active customer base by the churn rate (PLG monthly; SLG uses the monthly equivalent of the annual churn).
+\item \textbf{Add new customers.} For PLG, we add the planned new sign-ups for the current year (possibly reduced by a soft-freeze multiplier). For SLG, new enterprise contracts are spread quarterly (one quarter of the annual plan every 3rd month).
+\item \textbf{Compute recurring revenue.} PLG and SLG subscription MRR come from actives times price. Add-on MRR is a share of actives (adoption rate) times average pods times pod price.
+\item \textbf{Add store revenue (one-off).} A fraction of total actives purchase items from the store; this is treated as non-recurring cash in the month.
+\item \textbf{Compute monthly costs.} We apply the per-category uplifted annual cost divided by 12, then a policy multiplier if a spend cut is active.
+\item \textbf{Compute P\&L and cash.} Net result for the month is total revenue (recurring + store) minus costs. Cash balance increases (or decreases) by this net result.
+\item \textbf{Update burn and runway.} Burn is the positive part of monthly losses. Runway is cash divided by the moving-average burn over the last \emph{W} months (default 3). If there is no burn, runway is infinite.
+\item \textbf{Set policy for next month.} If runway is below thresholds, the model can reduce discretionary costs and/or slow paid PLG acquisitions in the following month.
+\end{enumerate}
+
+% \paragraph{What the charts show}
+% \begin{itemize}
+% \item A stacked area of \textbf{PLG total MRR} (plans + add-ons) vs. \textbf{SLG MRR}, with the \textbf{monthly cost} line overlaid.
+% \item A secondary axis showing the \textbf{runway (months)}.
+% \item Vertical markers for \textbf{operational break-even} (recurring MRR  monthly costs) and \textbf{cash break-even} (net result  0 including store).
+% \end{itemize}
+
+\paragraph{Key definitions (kept intuitive):}
+\begin{description}
+\item[Operational break-even] First month when recurring MRR (subscriptions + add-ons) is at least equal to monthly operating costs.
+\item[Cash break-even] First month when total revenue (recurring + store one-offs) covers mon\-th\-ly costs, i.e., net result .
+\item[Runway] How many months of operations remain at the current burn rate; we use a short moving average of recent burn to make it more stable.
+\end{description}
+
+\paragraph{Why this is conservative but controllable:}
+Uplift multipliers inflate costs in a credible way, capturing overhead that often appears in real execution. Policy gates make the plan self-correcting when runway tightens, protecting the path to break-even without assuming unrealistic growth.
+
+\subsection{Financial Model: Variables and Notation}
+\begin{itemize}
+  \item Time is in months: $t = 1,2,\dots,T$ with $T = 12 \cdot \text{years}$. Year index $y(t) = \lceil t/12 \rceil$.
+  \item Plans: PLG tiers $p \in \mathcal{P}=\{\text{standard},\ \text{business},\ \text{scale}\}$ and enterprise (SLG).
+  \item Customers: $c^p_t$ (active PLG customers of tier $p$ at month $t$), $c^{\mathrm{ent}}_t$ (active enterprise).
+  \item Prices: $P_p$ (monthly price for tier $p$), $P_{\mathrm{ent}}$ (enterprise MRR), $P_{\mathrm{pod}}$ (add-on pod).
+  \item Costs: $\mathrm{Cost}_{k,y}$ annual base cost for category $k$ in year $y$ with uplift factor $u_k$.
+  \item Churn: $\delta_{\mathrm{PLG}}$ (monthly), $\delta^{\mathrm{annual}}_{\mathrm{SLG}}$ (annual). 
+  \item Add-ons: adoption rate $r_p$, average pods $\bar{n}_p$.
+  \item Store: purchase rate $\rho$, average purchases $\bar{u}$, average sale price $P_{\mathrm{store}}$.
+  \item Policy parameters: spend cut $\gamma$ (e.g., $0.10$), runway guardrail $R_{12}$ (12 months), soft-freeze $R_{9}$ (9 months), window $W$ (e.g., $3$ months).
 \end{itemize}
 
-\clearpage
+\newpage
+\subsection{Cost Model}
+\paragraph{Annual cost with per-category uplift.}
+\begin{align}
+C^{\mathrm{annual}}_y 
+  &= \sum_{k \in \{\mathrm{MGMT},\mathrm{RND},\mathrm{PLG},\mathrm{SLG},\mathrm{PARTNER},\mathrm{INFRA},\mathrm{GA}\}}
+     \mathrm{Cost}_{k,y}\, u_k.
+\end{align}
 
-% --- PHASE 2 ---
-\subsection{Phase 2: Expansion and Growth (Quarters 3-4)}
-\textbf{Strategic Objective:} To use feedback from early adopters to improve the product, expand the ecosystem, and begin implementing enterprise features.
+\paragraph{Monthly operating cost with spend gate multiplier.}
+Let $s_t$ be the spend multiplier (policy below). Then:
+\begin{align}
+C^{\mathrm{monthly}}_t 
+  &= \frac{C^{\mathrm{annual}}_{y(t)}}{12} \cdot s_t.
+\end{align}
 
-\subsubsection*{Quarter 3 (Months 9-12): Optimization and Adoption}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Core Platform \& Backend:}
-    \begin{itemize}
-        \item Implement a secrets management system for user credentials.
-        \item Improve the performance of the execution engine.
-    \end{itemize}
-    \item \textbf{Frontend \& IDE:}
-    \begin{itemize}
-        \item Introduce a versioning system for automations (history and rollback).
-        \item Enhance the user dashboard with basic usage statistics.
-    \end{itemize}
-    \item \textbf{AI Assistant:}
-    \begin{itemize}
-        \item Improve the RAG pipeline for greater accuracy.
-        \item Add the ability to explain and "debug" existing YAML code.
-    \end{itemize}
-    \item \textbf{Ecosystem:}
-    \begin{itemize}
-        \item Release a preliminary SDK (Software Development Kit) for third-party plugin development.
-    \end{itemize}
-\end{itemize}
-
-\subsubsection*{Quarter 4 (Months 13-16): Enterprise Features}
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Core Platform \& Backend:}
-    \begin{itemize}
-        \item Develop support for On-Premise deployment.
-        \item Implement a Role-Based Access Control (RBAC) system.
-    \end{itemize}
-    \item \textbf{Frontend \& IDE:}
-    \begin{itemize}
-        \item Create an administration dashboard for managing teams and users.
-    \end{itemize}
-    \item \textbf{Ecosystem:}
-    \begin{itemize}
-        \item Introduce the first "premium" plugins for paid plans.
-    \end{itemize}
-    \item \textbf{Go-to-Market:}
-    \begin{itemize}
-        \item Officially launch paid plans (Pro and Enterprise).
-    \end{itemize}
-\end{itemize}
-
-\clearpage
+\subsection{Customer Dynamics}
+\paragraph{Churn conversion (enterprise annual $\to$ monthly).}
+\begin{align}

@@ -1,77 +1,80 @@
-    Available at: \url{https://market.us/report/automated-machine-learning-market/}.
 
-    \bibitem{MLOpsMRF}
-    MarketResearchFuture, \textit{MLOps Market Research Report (2024--2034 Forecast)}, August~2025.  
-    Available at: \url{https://www.marketresearchfuture.com/reports/mlops-market-18849}.
+Break-even arrives in \textbf{month 51}. At that point \textbf{recurring MRR is €247{,}103} against \textbf{€233{,}271} of costs (operational BE), and \textbf{total revenue €248{,}159} exceeds costs (cash BE). To get there the model \textbf{burns €4{,}939{,}370} in total, with a \textbf{minimum cash} of \textbf{€2{,}234{,}573} that also represents the \textbf{reserve at BE (30.9\% of the round)}. By the end of year~5, recurring MRR reaches \textbf{€326{,}645}/month ($\approx$ \textbf{€3.92M ARR}), monthly profit is \textbf{€94{,}565}, cash is \textbf{€2{,}673{,}539}, and the runway becomes effectively infinite.
 
-    \bibitem{deloitte2020}
-    Deloitte, \textit{Automation with the intelligent edge: A new frontier for a supercharged enterprise}, 2020. Available at: \url{https://www2.deloitte.com/us/en/insights/topics/talent/intelligent-automation-2020-survey-results.html}
+\paragraph{Takeaway}
+The chart makes three things obvious:
+\begin{enumerate}
+\item \emph{who pushes what} PLG builds the base, SLG closes the gap
+\item \emph{why costs jump} deliberate capacity steps with prudential uplifts
+\item \emph{how cash stays protected} runway never collapses (min 25.0 months) and accelerates as the revenue stack overtakes costs, exactly as the printed metrics report.
+\end{enumerate}
 
-    \bibitem{grandviewRPA}
-    Grand View Research, \textit{Robotic Process Automation (RPA) Market Size, Share \& Trends Analysis Report}, 2024. Available at: \url{https://www.grandviewresearch.com/industry-analysis/robotic-process-automation-rpa-market}
+\begin{table}[H]
+\centering
+\caption{Financial Projection Summary (Year-End)}
+\label{tab:financial_summary}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lrrrrrrr}
+\toprule
+\textbf{Year End} & \textbf{Monthly Cost (€)} & \textbf{Recurring MRR (€)} & \textbf{Store Revenue (€)} & \textbf{Total Revenue (€)} & \textbf{Monthly P/L (€)} & \textbf{Cash Balance (€)} & \textbf{Runway (months)} \\
+\midrule
+Year 1 & 123,212 & 10,948 & 116 & 11,064 & -112,149 & 5,740,147 & 50.6 \\
+Year 2 & 154,413 & 53,194 & 364 & 53,558 & -100,855 & 4,282,549 & 40.3 \\
+Year 3 & 216,746 & 135,360 & 755 & 136,115 & -80,631 & 2,823,198 & 30.8 \\
+Year 4 & 224,646 & 218,614 & 1,001 & 219,615 & -5,031 & 2,239,361 & 123.5 \\
+Year 5 & 233,271 & 326,645 & 1,191 & 327,836 & 94,565 & 2,673,539 & Profitable \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
 
-    \bibitem{mckinseyAI2023}
-    McKinsey \& Company, \textit{The state of AI in 2023: Generative AI’s breakout year}, August 1, 2023. Available at: \url{https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2023-generative-ais-breakout-year}
+\begin{table}[H]
+\centering
+\caption{Key Financial Metrics}
+\label{tab:financial_metrics}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ll}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Operating break-even & Month 51 (Year 5): Recurring MRR €247,103 $\geq$ Costs €233,271 \\
+Break-even & Month 51 (Year 5): Total Revenue €248,159 $\geq$ Costs €233,271 \\
+Capital burned until cash BE & €4,939,370 \\
+Monthly peak burn & €160,422 \\
+Minimum cash in period & €2,210,630 (30.9\% of round) \\
+Minimum runway (3-month MA) & 25.0 months \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
 
+\newpage
+\section{Why CNY 59{,}829{,}055 is the right amount}
 
-    \bibitem{langchainGitHub}
-    LangChain GitHub Repository. Available at: \url{https://github.com/langchain-ai/langchain}
+We request \textbf{CNY 59{,}829{,}055} ($\approx€7.15\text{M}$) because this is exactly the amount of capital that, in our \emph{conservative} scenario, takes the company to \textbf{operational and cash break-even in month~51} without forcing growth and while preserving a concrete safety margin. The simulation results are explicit: \textbf{cumulative burn to cash break-even = €4{,}939{,}370}, \textbf{cash on hand at break-even = €2{,}210{,}630} (i.e., \textbf{30.9\%} of the round), \textbf{minimum runway along the path = 25.0 months} (3-month moving average), and \textbf{peak monthly burn = €160{,}422}. We are asking for the amount the model shows as \emph{necessary and sufficient} to reach break-even with a structural contingency buffer.
 
-    \bibitem{gartnerAIBarriers}
-    Gartner, \textit{2 Barriers to AI Adoption}, November 2, 2021. Available at: \url{https://www.gartner.com/en/articles/2-barriers-to-ai-adoption}
+The plan is built to be resilient: costs are not ``bare-bones'' but \textbf{prudentially uplifted} by category (infrastructure, G\&A, PLG, SLG, R\&D, management) to capture recurring items that are often underestimated (enterprise support, audits, legal, recruiting, monitoring). In addition, the model introduces \textbf{automatic guardrails}: if runway drops below 12 months, \textbf{discretionary costs are cut by 10\%} the following month; below 9 months, \textbf{paid PLG acquisitions are damped} (multiplier 0.7). These are operational rules encoded in the model, not promises. In practice, the downside is protected by mechanisms that trigger on their own.
 
-    \bibitem{euAIAct}
-    European Commission, \textit{Regulatory framework proposal on artificial intelligence}. Available at: \url{https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai}
-    
-    \bibitem{AIOrch}
-    Market.us, \textit{AI Orchestration Platform Market Report (2024--2034 Forecast)}, February~2025. Available at: \url{https://market.us/report/ai-orchestration-platform-market/}.
+On the revenue side, we clearly separate \textbf{PLG} (plans + add-ons) and \textbf{SLG} (enterprise). This is not cosmetic: it lets us see, month by month, where spend levers return more and rebalance without ideology. With this mix and current prices, \textbf{operational break-even} arrives in \textbf{month~51} with \textbf{recurring MRR of €247{,}103} against \textbf{monthly costs of €233{,}271}; in the same month, \textbf{cash break-even} is achieved because \textbf{total revenue (€248{,}159)} exceeds costs. By the end of year $\sim 5$, recurring MRR reaches \textbf{€326{,}645} ($\approx$ \textbf{€3.92M ARR}). In terms of capital efficiency, the \textbf{implicit burn multiple} (burn to break-even $\div$ ARR at break-even) is \textbf{~1.66x}, consistent with a conservative product+go-to-market build and with costs already uplifted credibly.
 
-    \bibitem{zapierApps}
-    Zapier, \textit{Explore 6,000+ apps}. Available at: \url{https://zapier.com/apps}
+Why, then, \emph{this} amount and not less? With less capital, the model would trigger guardrails more frequently, creating operational stop-and-go (cuts/cooling periods) that stretch timelines and raise opportunity cost precisely when continuity matters most. Why not more? Because beyond this threshold the bottleneck is not budget but \textbf{channel absorption} and the natural cadence of enterprise delivery; extra cash today would increase dilution without improving outcomes relative to the model.
 
-    \bibitem{g2ZapierReviews}
-    G2, \textit{Zapier Reviews}. Available at: \url{https://www.g2.com/products/zapier/reviews}
+\textbf{Use of proceeds} remains anchored to the very categories in the simulation and their uplifts: product/R\&D (hardening, observability, security), infrastructure \& enterprise support, SLG (account, solutions/POC), PLG (content/SDK/community), partner enablement, G\&A \& compliance, management. We are not opening new spend lines: we are funding what the model already measures month by month. 
 
-    \bibitem{zapierPricing}
-    Zapier, \textit{Zapier Pricing Plans}. Available at: \url{https://zapier.com/pricing}
+Finally, the \textbf{risk profile} is readable. Minimum runway does not fall below \textbf{25.0 months}, guardrails limit cash erosion when needed, and the \textbf{30.9\%} buffer at break-even provides headroom against procurement delays, infra/compliance spend variability, or FX moves. At the same time, the PLG/SLG separation makes it straightforward—even ex post—to show that capital allocation followed realized returns rather than a one-size-fits-all plan.
 
+\textbf{In short:} \textbf{CNY 59{,}829{,}055} fully finances the conservative path to break-even, with sufficient buffer and automated cost discipline. It is a proportional, defensible, and—above all—\textbf{replicable} ask: investors can verify month by month that model metrics remain under control and that cash tracks the expected trajectory.
 
-    \bibitem{zapierOpenAI}
-    Zapier, \textit{OpenAI Integrations}. Available at: \url{https://zapier.com/apps/openai/integrations}
+\subsection{Strategic Buffer Rationale: Navigating the AI Orchestration Frontier}
+The 30.9\% capital reserve at break-even (€2.21M) represents a deliberate strategic allocation for navigating the unprecedented velocity of change in the AI orchestration market. Unlike traditional SaaS sectors where product-market fit follows predictable patterns, the AI infrastructure landscape is experiencing fundamental shifts every 3-6 months—from new LLM architectures to emerging orchestration standards like MCP. This buffer enables IntellyHub to execute rapid strategic pivots without compromising runway: whether adapting to a breakthrough in autonomous agent capabilities, integrating game-changing models that didn't exist at planning time, or shifting focus between PLG and SLG channels based on real market response. Historical precedent from successful AI infrastructure companies (Weights \& Biases, Hugging Face) demonstrates that winners in this space required 2-3 significant pivots before achieving sustainable growth—each consuming 15-20\% of available capital. Our reserve ensures we can execute at least one major strategic realignment while maintaining 12+ months of operational runway, transforming what would be existential threats into competitive advantages. This is not excess capital; it's calculated optionality insurance in a market where the only certainty is radical change, and where the ability to pivot faster than competitors—while they scramble for emergency funding—becomes the decisive factor between market leadership and obsolescence.
 
-    \bibitem{g2MakeVsZapier}
-    G2, \textit{Compare Make vs. Zapier}. Available at: \url{https://www.g2.com/compare/make-vs-zapier}
+\newpage
+\section{Go-to-Market Strategy}
+% Come raggiungerai i tuoi clienti?
 
-
-    \bibitem{autogenGitHub}
-    Microsoft, \textit{AutoGen GitHub Repository}. Available at: \url{https://github.com/microsoft/autogen}
-
-    \bibitem{crewaiGitHub}
-    Joao Moura, \textit{CrewAI GitHub Repository}. Available at: \url{https://github.com/joaomdmoura/crewAI}
-
-    \bibitem{langchainValuation}
-    TechCrunch, \textit{AI infrastructure startup LangChain reportedly raises $100M at $1.1B valuation}, July 9, 2025. Available at: \url{https://siliconangle.com/2025/07/09/ai-infrastructure-startup-langchain-reportedly-raises-100m-1-1b-valuation/#:~:text=Artificial%20intelligence%20infrastructure%2C%20developer%20tools,on%20a%20%241.1%20billion%20valuation.}
-
-    \bibitem{langchainIntegrations}
-    LangChain Documentation, \textit{LangChain Integrations}. Available at: \url{https://python.langchain.com/docs/integrations/providers/}
-
-    \bibitem{langchainCritique}
-    Medium, \textit{Challenges \& Criticisms of LangChain}, March 3, 2025. Available at: \url{https://shashankguda.medium.com/challenges-criticisms-of-langchain-b26afcef94e7}
-
-    \bibitem{mrfRPA}
-    Market Research Future, \textit{Robotic Process Automation (RPA) Market Research Report Information By Process (Decision Support, Automated Solution, and Management Solution), By Operations (Rule-based, and Knowledge-based), By Industry (Manufacturing \& Logistics, and IT \& Telecommunication), and By Region (North America, Europe, Asia-Pacific, And Rest of the World) –Industry Size, Share and Forecast Till 2032}. Available at: \url{https://www.marketresearchfuture.com/reports/robotic-process-automation-market-2209}
-
-    \bibitem{uipathGartner}
-    UiPath, \textit{Gartner Magic Quadrant for RPA}, 2025. Available at:
-    \url{https://www.uipath.com/resources/automation-analyst-reports/gartner-magic-quadrant-robotic-process-automation}
-
-    \bibitem{awsSagemaker}
-    Amazon AWS SageMaker, \textit{Amazon SageMaker}, Available at: \url{https://aws.amazon.com/sagemaker/}
-
-    \bibitem{forresterRPAvsAI}
-    Craig Le Clair, \textit{Will RPA Platforms Remain Relevant? AI Agents May Hold The Answer.}, Forrester, April 25, 2024. Available at: \url{https://www.forrester.com/blogs/will-rpa-platforms-remain-relevant-ai-agents-may-hold-the-answer/}
-
-\end{thebibliography}
-
-
-\end{document}
+IntellyHub's Go-to-Market (GTM) strategy is based on a hybrid model that combines two growth engines:
+\begin{enumerate}
+    \item \textbf{Product-Led Growth (PLG) for SaaS:} We leverage the superiority of the product, a Free Tier, and the Automation Store to attract, activate, and convert users in a scalable, bottom-up fashion.
+    \item \textbf{Sales-Led Growth (SLG) for On-Premise \& Enterprise:} We use a targeted, consultative sales approach to win large customers with complex security and governance needs.
+\end{enumerate}
+These two engines are designed to be mutually reinforcing: the success of the PLG motion generates leads and brand awareness for the sales team.

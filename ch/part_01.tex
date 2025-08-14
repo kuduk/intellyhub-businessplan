@@ -13,6 +13,7 @@
 \usepackage{fancyhdr} % Per header e footer personalizzati
 \usepackage{tabularx} % Per tabelle con larghezza definita
 \usepackage{amsfonts} % Per simboli matematici se necessari
+\usepackage{amsmath}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -21,10 +22,13 @@
 \usepackage{float}
 \usepackage{eurosym}
 \usepackage{microtype}
+\usepackage{siunitx} 
 \pgfplotsset{compat=1.18}
 % --- IMPOSTAZIONE FONT E LINGUA (Richiede XeLaTeX) ---
 \usepackage{fontspec}
 \usepackage{xeCJK}
+\usepackage{multirow}
+\usepackage{booktabs,longtable,siunitx,ragged2e,placeins} 
 
 \def\UrlBreaks{\do\.\do\/\do\-\do\_\do\?\do\&} % Per permettere le interruzioni di riga negli URL
 \newcolumntype{L}{>{\raggedright\arraybackslash}X} % Per colonne a larghezza variabile con testo allineato a sinistra
@@ -74,7 +78,3 @@
   {\normalfont\Large\bfseries\color{SecondaryColor}}
   {\thesection}{1em}{}
 \titleformat{\subsection}
-  {\normalfont\large\bfseries\color{PrimaryColor}}
-  {\thesubsection}{1em}{}
-\titleformat{\subsubsection}
-  {\normalfont\normalsize\bfseries\color{AccentColor}}

@@ -1,80 +1,80 @@
-\midrule
-0.25 vCPU / 0.5 GB & €0.018 & €0.003 \\
-1 vCPU / 2 GB & €0.074 & €0.012 \\
-2 vCPU / 4 GB & €0.148 & €0.025 \\
-1 vCPU / 4 GB + 1 GPU & €0.938 & €0.156 \\
+\textbf{Scale} & \euro{999} & 50 & 70 (max) & Scalability (25 users, SSO). \\
+\addlinespace
+\textbf{Enterprise} & From \euro{2,999} & 100+ & Unlimited & \textbf{AI Platform for proactive analysis and auditing}, On-Premise option. \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabularx}
+\end{table}
 
+\subsubsection{Execution Cost Analysis}
 
-\smallskip
-\noindent *Annual billing; month-to-month +15\%.
+To ensure the financial viability of our pricing, we have compared the monthly plan price against the raw infrastructure cost of the included Pods, assuming a 24/7 usage pattern for a standard-sized Pod (0.25 vCPU, 0.5 GB RAM). The cost of one such Pod running 24/7 is approximately \euro{13.32 per month}. The table below illustrates the gross margin on this consumption.
 
-
-\subsection*{4. Monthly Plan Allocation (Pod-Minutes)}
-\begin{center}
-\begin{tabular}{@{}lcc@{}}
+\begin{table}[H]
+\centering
+\caption{Plan Price vs. Estimated Infrastructure Cost (24/7 Usage)}
+\label{tab:cost_analysis}
+\begin{tabularx}{\textwidth}{L X X X} 
 \toprule
-\textbf{Plan} & \textbf{Monthly fee} & \textbf{Pod‑minutes included} \\
+\textbf{Plan} & \textbf{Monthly Price} & \textbf{Est. Infrastructure Cost} & \textbf{Est. Gross Margin*} \\
 \midrule
-Free        & €0    & 3\,000 (100 per day) \\
-Developer   & €25   & 10\,000 \\
-Team        & €95   & 60\,000 \\
-Growth      & €390  & 300\,000 \\
-Enterprise Cloud & custom  & Custom annual pool \\
+\textbf{Standard} & \euro{49} & \euro{39.96} (for 3 Pods) & 18.4\% \\
+\addlinespace
+\textbf{Business} & \euro{299} & \euro{199.80} (for 15 Pods) & 33.2\% \\
+\addlinespace
+\textbf{Scale} & \euro{999} & \euro{666.00} (for 50 Pods) & 33.3\% \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabularx}
+\raggedright
+\footnotesize{*Margin is calculated solely on the cost of raw compute and memory resources for included Pods and does not account for other operational costs.}
+\end{table}
 
-\subsection*{5. Self-Hosted / On-Prem Licenses}
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{License} & \textbf{Concurrent pod cap} & \textbf{Annual fee} & \textbf{Extra pod} \\
-\midrule
-Core & 50 Small-equiv. & €28\,000 & €15 / pod-month \\
-Plus & 200 & €65\,000 & €13 / pod-month \\
-Elite & Unlimited & custom & --- \\
-\bottomrule
-\end{tabular}
-\end{center}
 
-\subsection*{6. Per-User Pricing and Gross Margin}
-\begin{center}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Tier} & \textbf{Price / user / mo} & \textbf{Assumed Gross Margin} & \textbf{Gross Profit / user} \\
-\midrule
-Developer & €25 & 40\,\% & €10 \\
-Team      & €95 & 40\,\% & €38 \\
-Growth    & €390 & 40\,\% & €156 \\
-\bottomrule
-\end{tabular}
-\end{center}
 
-\subsection*{7. Scenario 1 – Product‑Led Growth Funnel}
-\begin{center}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Population} & \textbf{User Mix} (Dev / Team / Growth) & \textbf{MRR} & \textbf{Gross Profit} \\
-\midrule
-100 users   & 70 / 20 / 10    & €7\,550   & €3\,020  \\
-500 users   & 350 / 100 / 50  & €37\,750  & €15\,100 \\
-1\,000 users & 700 / 200 / 100 & €75\,500  & €30\,200 \\
-\bottomrule
-\end{tabular}
-\end{center}
+\subsection{Model Assumptions}
+\begin{enumerate}
+    \item \textbf{Pricing (ARPA - Average Revenue Per Account):}
+    \begin{itemize}
+        \item \textbf{Pro Plan (SaaS):} An average value per customer of \textbf{\euro{} 300/month}.
+        \item \textbf{Enterprise Plan (On-Premise):} An Annual Contract Value (ACV) of \textbf{\euro{} 18,000}, which translates to \textbf{\euro{} 1,500 MRR} per customer.
+    \end{itemize}
 
-\subsection*{8. Scenario 2 – Enterprise‑Heavier Mix}
-\begin{center}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Population} & \textbf{User Mix} (Dev / Team / Growth) & \textbf{MRR} & \textbf{Gross Profit} \\
-\midrule
-100 users   & 50 / 30 / 20   & €13\,650  & €5\,460  \\
-500 users   & 250 / 150 / 100 & €68\,250  & €27\,300 \\
-1\,000 users & 500 / 300 / 200 & €136\,500 & €54\,600 \\
-\bottomrule
-\end{tabular}
-\end{center}
+    \item \textbf{Net New Customer Acquisition Rate:}
+    \begin{itemize}
+        \item \textbf{Year 1:} Average of \textbf{3 new Pro customers} and \textbf{0.33 Enterprise customers} per month (4 Enterprise contracts/year).
+        \item \textbf{Year 2:} Average of \textbf{8 new Pro customers} and \textbf{0.75 Enterprise customers} per month (9 Enterprise contracts/year).
+        \item \textbf{Year 3:} Average of \textbf{15 new Pro customers} and \textbf{1.5 Enterprise customers} per month (18 Enterprise contracts/year).
+        \item \textbf{Year 4:} Average of \textbf{25 new Pro customers} and \textbf{2 Enterprise customers} per month (24 Enterprise contracts/year).
+    \end{itemize}
+
+    \item \textbf{Churn Rate:}
+    \begin{itemize}
+        \item A monthly churn rate of \textbf{2\%} for Pro customers.
+        \item An annual churn rate of \textbf{1\%} for Enterprise customers (assuming high-stickiness annual contracts).
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Market benchmarks and customer-acquisition rationale}
+
+Our customer acquisition model is based on conservative assumptions drawn from established B2B SaaS industry benchmarks. For our product-led growth motion, we assume a free-to-paid conversion rate that lies at the cautious end of the typical performance spectrum for freemium products.
+
+Retention assumptions are similarly prudent. Our projected monthly churn rates for paying customers are aligned with those of strong, but not exceptional, B2B SaaS operators. For enterprise clients, where contracts are longer and relationships are deeper, we assume a significantly lower annual churn rate, mirroring the high "stickiness" observed in best-in-class, publicly-traded infrastructure software companies.
+
+The productivity targets for our enterprise sales team are also set conservatively within the standard performance envelope for an Account Executive in the enterprise software space. We project a number of annual deals per salesperson that is well within industry norms, especially when supported by a flow of qualified leads from our product-led funnel.
+
+Taken together, these deliberately restrained assumptions ensure that the acquisition curve in our financial model is plausible and not reliant on best-case-scenario performance.
+
+\newpage
+\section{Hiring Roadmap and Project Costs}
+\label{sec:hiring-roadmap}
+
+The hiring plan scales the team deliberately to support product development, go-to-market execution, and partner enablement across the first three years. We grow from \textbf{13 FTEs in Year~1} to \textbf{18 FTEs in Year~2} and \textbf{25 FTEs in Year~3}, with corresponding personnel costs of \textbf{\EUR{874{,}200}}, \textbf{\EUR{1{,}076{,}040}}, and \textbf{\EUR{1{,}453{,}640}}, respectively.\footnote{Figures in this section refer to planned personnel costs (net of uplifts). Financial sustainability metrics below are derived from the simulation used in \texttt{breakeven2.py}, which applies prudential uplifts by cost category and includes Infrastructure \& G\&A.}
+
+\subsection{Management \& Leadership}
+From Day~1 we staff three critical executive roles full-time: \textit{CTO}, \textit{CSO}, and \textit{CPO} (\EUR{120{,}000} each per year). A \textit{CFO} (\EUR{93{,}600}) is added in Year~2 to strengthen financial planning and control. In Year~3 we add a \textit{CCO} (\EUR{93{,}600}) to lead commercial strategy. To attract top talent, the plan includes two one-off relocation bonuses of \EUR{30{,}000} each in Year~1. Resulting management costs: \textbf{\EUR{420{,}000}} (Y1), \textbf{\EUR{453{,}600}} (Y2), \textbf{\EUR{547{,}200}} (Y3).
+
+\subsection{R\&D (Product \& Engineering)}
+Year~1 fields an 8-person product and engineering team covering UI, backend/core logic, AI/ML, DevOps, and plugin/ecosystem development. The organization remains at 8 FTEs in Year~2 to consolidate delivery, then expands to 10 FTEs in Year~3 by adding a second AI/ML Engineer and a Generalist Software Developer. Costs: \textbf{\EUR{362{,}400}} (Y1), \textbf{\EUR{362{,}400}} (Y2), \textbf{\EUR{456{,}400}} (Y3).
+
+\subsection{PLG Team (Marketing \& Community)}
+To drive product-led growth, we start with a Marketing \& Community Manager in Year~1, add a Developer Advocate in Year~2, and a dedicated Community Manager in Year~3 (1~$\rightarrow$~2~$\rightarrow$~3 FTEs). Costs: \textbf{\EUR{46{,}800}} (Y1), \textbf{\EUR{85{,}800}} (Y2), \textbf{\EUR{117{,}000}} (Y3).
+

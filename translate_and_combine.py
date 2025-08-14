@@ -4,6 +4,8 @@ from openai import OpenAI
 # Best Practice: The client automatically finds the API key if you set it as an
 # environment variable named OPENAI_API_KEY. Avoid hardcoding keys in your script.
 # If you must, you can pass the key directly: client = OpenAI(api_key="sk-proj-...")
+
+# $env:OPENAI_API_KEY="sk-proj-..."
 client = OpenAI()
 
 def translate_text(text_to_translate):
@@ -14,10 +16,10 @@ def translate_text(text_to_translate):
     try:
         # NEW: Use the client object to create a chat completion
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-nano",
             messages=[
                 # It's good practice to give instructions to the model in the "system" role.
-                {"role": "system", "content": "You are an expert translator. Translate the user's text to Chinese. Crucially, you must preserve all LaTeX commands (like \\section, \\textbf, $, $$, etc.) and formatting exactly as they appear in the original text. Reply only with the translation without any additional text or comments or block codes. Don't complete this is a chunck of the original text."},
+                {"role": "system", "content": "You are an expert translator. Translate the user's text to Chinese. Crucially, you must preserve all LaTeX commands (like \\section, \\textbf, $, $$, etc.) and formatting exactly as they appear in the original text. Reply only with the translation without any additional text or comments or block codes. Don't complete latex blocks this is a chunck of the original text."},
                 {"role": "user", "content": text_to_translate}
             ]
         )

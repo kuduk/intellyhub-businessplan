@@ -1,80 +1,80 @@
-\end{table}
+where $N_t=\sum_{j=t-W+1}^{t}\mathbf{1}_{\{\mathrm{Burn}_j>0\}}$ is the count of positive-burn months in the window.
+
+\subsection{Break-even and Reserve}
+\paragraph{Operational and cash break-even (first month that satisfies).}
+\begin{align}
+t^{\mathrm{BE\_op}} 
+  &= \min\{\, t \mid \mathrm{MRR}^{\mathrm{rec}}_t \ge C^{\mathrm{monthly}}_t \,\},\\
+t^{\mathrm{BE\_cash}} 
+  &= \min\{\, t \mid \Pi_t \ge 0 \,\}.
+\end{align}
+
+\paragraph{Cumulative burn to cash break-even and reserve.}
+\begin{align}
+\mathrm{Burn}^{\mathrm{cum}}_{\le t^{\mathrm{BE\_cash}}} 
+  &= \sum_{j=1}^{t^{\mathrm{BE\_cash}}} \max\{0,\ -\Pi_j\},\\
+\mathrm{Reserve}
+  &= \text{INITIAL\_CAPITAL} - \mathrm{Burn}^{\mathrm{cum}}_{\le t^{\mathrm{BE\_cash}}}.
+\end{align}
+
+\subsection{Policy Gates (Spend \& Acquisition Multipliers)}
+\paragraph{Spend gate (applied to next month’s cost).}
+With guardrail $R_{12}$ months and spend cut $\gamma$:
+\begin{align}
+s_t 
+  &= 
+  \begin{cases}
+    1-\gamma, & \mathrm{Runway}_{t-1} < R_{12},\\
+    1, & \text{otherwise.}
+  \end{cases}
+\end{align}
+
+\paragraph{PLG soft-freeze (applied to current month acquisitions).}
+With soft-freeze threshold $R_{9}$ months:
+\begin{align}
+m^{\mathrm{PLG}}_t 
+  &= 
+  \begin{cases}
+    0.7, & \mathrm{Runway}_{t-1} < R_{9},\\
+    1, & \text{otherwise.}
+  \end{cases}
+\end{align}
+
+\subsection{Mapping from Code to Symbols (for clarity)}
+\begin{itemize}
+  \item $P_{\mathrm{ent}} = \texttt{PRICES['enterprise\_mrr']}$, $P_p=\texttt{PRICES['standard'|'business'|'scale']}$, $P_{\mathrm{pod}}=\texttt{PRICES['add\_on\_pod']}$.
+  \item $\delta_{\mathrm{PLG}}=\texttt{CHURN\_PLG\_MONTHLY}$, $\delta^{\mathrm{annual}}_{\mathrm{SLG}}=\texttt{CHURN\_SLG\_ANNUAL}$.
+  \item $r_p,\ \bar{n}_p$ from \texttt{ADD\_ON\_ADOPTION[plan]['adoption\_rate'|'avg\_pods']}.
+  \item $\rho,\ \bar{u},\ P_{\mathrm{store}}$ from \texttt{STORE\_REVENUE}.
+  \item $a^p_y$ from \texttt{ACQUISITION\_PLG[y]} tuples; $A^{\mathrm{SLG}}_y$ from \texttt{ACQUISITION\_SLG[y]}.
+  \item $u_k$ from \texttt{UPLIFT} and $\mathrm{Cost}_{k,y}$ from the respective cost dictionaries.
+  \item $s_t$ controlled by \texttt{SPEND\_CUT\_PERCENTAGE} and \texttt{RUNWAY\_GUARDRAIL}
+  \item $m^{\mathrm{PLG}}_t$ controlled by \texttt{ACQ\_DAMPING\_WHEN\_SOFT\_FREEZE} and \texttt{RUNWAY\_SOFT\_FREEZE}.
+\end{itemize}
+
+GitHub link \href{https://github.com/kuduk/intellyhub-businessplan/blob/main/breakeven.v2.02.py}{Python Script Model}
 
 \newpage
-\subsection{Financial Risks}
-\textit{Risks related to cash flow, funding, and financial sustainability.}
+\subsection{Break-even Analysis: Chart}
+\begin{figure}[H]
+    \centering 
+    \includegraphics[width=\textwidth]{financial_projection.png}
+    \caption{Break-even analysis: PLG vs. SLG MRR, monthly costs, and runway.}
+    \label{fig:break_even_analysis}
+\end{figure} 
+\subsection{Break-even Analysis: Chart Interpretation}
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{@{}lL@{}}
-\toprule
-\textbf{Risk} & \textbf{Description} \\
-\midrule
-\textbf{High Initial Burn Rate} & The aggressive hiring plan results in a high monthly operational cost (€59,600/month in Year 1) before significant revenue is generated. This creates immense pressure to achieve product-market fit and generate revenue quickly. \\
-\addlinespace
-\textbf{Funding Dependency} & The business model is not designed for short-term profitability. Its survival and growth are critically dependent on the ability to successfully raise subsequent funding rounds (Seed, Series A). Failure to meet the growth KPIs expected by investors is an existential threat. \\
-\addlinespace
-\textbf{Pricing Model Validation} & The proposed value metrics (executions, active automations) are logical but untested. An incorrect pricing model could lead to customer friction (if too expensive) or leave significant revenue on the table (if too cheap). \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\paragraph{Legend (quick read)}
+\begin{itemize}
+  \item \textbf{Green (PLG -- Plans + Add-ons):} self-service recurring revenue.
+  \item \textbf{Blue (SLG -- Enterprise):} enterprise recurring revenue; grows in quarterly ``steps'' because annual deals are smoothed across quarters.
+  \item \textbf{Red dashed:} monthly operating cost (with prudential uplifts), rising in yearly steps.
+  \item \textbf{Purple dotted:} runway (months), computed as cash divided by the 3-month moving average burn.
+  \item \textbf{Vertical lines:} operational break-even (blue, month~51) and cash break-even (black, month~51).
+\end{itemize}
 
-\newpage
-\subsection{Mitigation Strategies}
-\textit{Concrete actions to address and reduce the identified risks.}
+In the first three years the chart shows a patient build. The green PLG area rises steadily as monthly sign-ups compound (after churn) and add-ons add incremental MRR. The blue SLG area climbs in visible quarterly steps when enterprise contracts are booked. Costs move in blocks: each new year adds planned capacity (teams, infra, G\&A with uplifts), so the red line jumps and then stays flat until the next step.
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{@{}lL@{}}
-\toprule
-\textbf{Risk Category} & \textbf{Mitigation Strategy} \\
-\midrule
-\textbf{Market Risks} & 
-\textbf{Positioning \& Education:} Focus marketing not on replacing a single script, but on eliminating the long-term chaos of managing \textit{many} scripts. Use case studies like "Esplorado" to provide undeniable proof of value. \newline\newline
-\textbf{Hybrid GTM:} Run the PLG (SaaS) and SLG (On-premise) motions in parallel. Use the faster feedback loop from the PLG side to refine the product and messaging for the slower enterprise sales cycle. \newline\newline
-\textbf{Strategic AI Roadmap:} Position the current AI as the pragmatic, secure, and reliable choice for production environments. Frame the roadmap as an evolution towards more autonomous capabilities, building on the robust foundation we have today. \\
-\addlinespace
-\textbf{Operational Risks} & 
-\textbf{Documentation \& Cross-Training:} Invest heavily in internal documentation from day one. Implement a culture of knowledge sharing and pair programming to reduce dependency on single individuals. \newline\newline
-\textbf{Invest in Observability \& Testing:} Dedicate resources to a robust automated testing suite and integrate an APM (Application Performance Monitoring) tool early on to proactively identify and resolve issues. The test suite specifically covers the IDE/YAML sync logic. \newline\newline
-\textbf{Curated Ecosystem:} Initially, the Store will only feature "Official" and "Verified Partner" plugins. Implement a clear and rigorous review process for all future community submissions, including automated security scans and quality checks. \\
-\addlinespace
-\textbf{Financial Risks} & 
-\textbf{Milestone-Based Spending:} Tie major increases in spending (especially on marketing and sales hires) to the achievement of specific, pre-defined milestones (e.g., reaching the first 10 paying customers, achieving a certain retention rate). \newline\newline
-\textbf{Continuous Investor Relations:} Maintain a transparent and regular communication channel with current and potential future investors, sharing progress on KPIs to build confidence and streamline the next funding round. \newline\newline
-\textbf{Pricing Iteration:} Launch with a simple, flexible pricing model. Engage directly with early customers to understand the value they are getting and be prepared to iterate on the pricing structure based on their feedback and usage data. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+These dynamics match the year-end figures. At the end of year~1, costs are \textbf{€123{,}212}/month versus \textbf{€10{,}948}/month of recurring MRR (loss \textbf{€112{,}149}/month, cash \textbf{€5{,}740{,}147}, runway \textbf{50.6} months). By year~2: \textbf{€154{,}413} vs.\ \textbf{€53{,}194} (loss \textbf{€100{,}855}/month), cash \textbf{€4{,}282{,}549}, runway \textbf{40.3} months. By year~3: \textbf{€216{,}746} vs.\ \textbf{€135{,}360} (loss \textbf{€80{,}631}/month), cash \textbf{€2{,}239{,}361}, runway \textbf{30.8} months. The curve of revenues clearly closes the gap to costs while cash remains controlled: the \textbf{minimum observed runway is 25.0 months} and the \textbf{peak monthly burn} is \textbf{€160{,}442}.
 
-% \newpage
-% \subsection{Product Screenshots}
-% Screenshot, mockup o diagrammi del prodotto.
-
-\newpage
-% Aggiungi qui eventuali fonti, studi o articoli citati nel documento.
-\begin{thebibliography}{99}
-    \bibitem{AIMarket}
-    Market.us, \textit{Automated Machine Learning Market Report}, Available at: \url{https://market.us/report/automated-machine-learning-market/}, March~2025.
-    
-    \bibitem{MLOpsMarket}
-    MarketReserchFuture.com, \textit{Mlops Market Research Report: Information By Component (Service, Platform), By Deployment Mode (On-Premises, Cloud), By Organization Size (Large Enterprise, SME's), By Verticals (BFSI, Retail and e-Commerce, Government and Defense, Healthcare and Life science, Manufacturing, and Others) And By Region (North America, Europe, Asia-Pacific, And Rest Of The World) –Market Forecast Till 2034.}, Available at: \url{https://www.marketresearchfuture.com/reports/mlops-market-18849}, Agoust~2025.
-    
-    \bibitem{AIOrch}
-    Market.us, \textit{AI Orchestration Platform Market Report (2024--2034 Forecast)}, February~2025.  
-    Available at: \url{https://market.us/report/ai-orchestration-platform-market/}.
-
-    \bibitem{GartnerAgentic}
-    Reuters (reporting Gartner), \textit{Over 40\% of agentic AI projects will be scrapped by 2027 … by 2028, 33\% of enterprise software will include agentic AI and 15\% of decisions will be made autonomously,} June~25,~2025.  
-    Available at: \url{https://www.reuters.com/business/over-40-agentic-ai-projects-will-be-scrapped-by-2027-gartner-says-2025-06-25/}.
-
-    \bibitem{MLOpsMM}
-    MarketsandMarkets Research, \textit{MLOps Market Size is Anticipated to Cross US\$5.9 Billion by 2027, growing at a CAGR of 41.0\%}, April~21,~2023.  
-    Available at: \url{https://www.globenewswire.com/news-release/2023/04/21/2652028/0/en/MLOps-Market-Size-is-Anticipated-to-Cross-US-5-9-billion-by-2027-growing-at-a-CAGR-of-41-0-Report-by-MarketsandMarkets.html}.
-
-    \bibitem{ModelOpsGV}
-    Grand View Research, \textit{ModelOps Market Report}, 2025 edition.  
-    Available at: \url{https://www.grandviewresearch.com/industry-analysis/modelops-market-report}.
-
-    \bibitem{AIMLMarket}
-    Market.us, \textit{Automated Machine Learning Market Report (2024--2034 Forecast)}, March~2025.  
+In year~4 the gap narrows decisively. The larger SLG steps make the blue area expand faster and the stack (PLG+SLG) nearly meets the cost line. Year-end: costs \textbf{€224{,}646}/month versus recurring MRR \textbf{€218{,}614}/month (total revenue \textbf{€219{,}615}/month), a near-flat loss of \textbf{€5{,}031}/month, cash \textbf{€2{,}239{,}361}. The purple runway line starts to spike because the moving-average burn approaches zero.
